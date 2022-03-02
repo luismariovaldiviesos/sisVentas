@@ -284,6 +284,9 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+
+
+
         // //agenda
 
         // Permission::create([

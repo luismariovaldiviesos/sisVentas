@@ -28,6 +28,7 @@ class CreateEmpresasTable extends Migration
             $table->integer('tipoEmision'); // 1
             $table->string('contribuyenteEspecial'); //5368
             $table->string('obligadoContabilidad'); // si no
+            $table->string('logo');
             $table->timestamps();
         });
     }

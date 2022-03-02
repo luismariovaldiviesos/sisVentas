@@ -28,6 +28,7 @@ class EmpresaSeeder extends Seeder
             'tipoEmision' => '001',
             'contribuyenteEspecial' => 'revisar',
             'obligadoContabilidad' => 'NO',
+            'logo' => 'noImage.jpg'
         ]);
     }
 }

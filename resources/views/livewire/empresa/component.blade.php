@@ -110,6 +110,15 @@
                         </div>
                     </div>
 
+                    <div class="col-sm-12 col-md-6">
+                        <div class="form-group">
+                            <label >Logo</label>
+                            <input type="file" wire:model.lazy="logo"  accept="image/x-png, image/jpeg, image/gif" class="form-control">
+                            @error('logo') <span class="text-danger ">{{ $message }}</span> @enderror
+
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

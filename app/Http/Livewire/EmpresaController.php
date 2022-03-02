@@ -4,12 +4,16 @@ namespace App\Http\Livewire;
 
 use App\Models\Empresa;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class EmpresaController extends Component
 {
 
+    use WithFileUploads;
+
     public $razonSocial, $nombreComercial, $ruc,$estab,$ptoEmi,$dirMatriz,$dirEstablecimiento,
-    $telefono, $email, $ambiente,$tipoEmision,$contribuyenteEspecial,$obligadoContabilidad, $selected_id;
+    $telefono, $email, $ambiente,$tipoEmision,$contribuyenteEspecial,$obligadoContabilidad, $logo, $selected_id;
 
 
     public  function  mount()
@@ -32,6 +36,7 @@ class EmpresaController extends Component
             $this->tipoEmision = $empresa[0]->tipoEmision;
             $this->contribuyenteEspecial = $empresa[0]->contribuyenteEspecial;
             $this->obligadoContabilidad = $empresa[0]->obligadoContabilidad;
+            $this->logo = $empresa[0]->logo;
         }
 
     }
@@ -108,8 +113,22 @@ class EmpresaController extends Component
             'ambiente' => $this->ambiente,
             'tipoEmision' => $this->tipoEmision,
             'contribuyenteEspecial' => $this->contribuyenteEspecial,
-            'obligadoContabilidad' => $this->obligadoContabilidad
+            'obligadoContabilidad' => $this->obligadoContabilidad,
+            'logo' => $this->logo,
         ]);
+
+        if ($this->logo) {
+            $nombreperosnalizado =  uniqid() . ' _.' . $this->logo->extension();
+            $this->logo->storeAs('public/empresa',$nombreperosnalizado);
+            $imagenTemporal =  $empresa->logo;
+            $empresa->logo = $nombreperosnalizado;
+            $empresa->save();
+            if ($imagenTemporal) {
+                if (file_exists('storage/empresa/' . $imagenTemporal)) {
+                    unlink('storage/empresa/' . $imagenTemporal);
+                }
+            }
+        }
          $this->emit('empresa-added','Datos de Empresa guardado correctamente');
 
     }
