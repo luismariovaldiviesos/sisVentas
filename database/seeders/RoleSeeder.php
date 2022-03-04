@@ -31,64 +31,64 @@ class RoleSeeder extends Seeder
         ]);
 
 
-        // permisos citas
+        // permisos categorias
 
-        // Permission::create([
-        //     'name' => 'crear_cita',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_cita',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_cita',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_cita',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'PACIENTE',
-        //     'guard_name' => 'web',
-        // ]);
+        Permission::create([
+            'name' => 'crear_categoria',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_categoria',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_categoria',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_categoria',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_categoria',
+            'guard_name' => 'web',
+        ]);
 
         // permisos clinica
 
 
         Permission::create([
-            'name' => 'ver_despacho',
+            'name' => 'ver_empresa',
             'guard_name' => 'web',
         ]);
 
         Permission::create([
-            'name' => 'editar_despacho',
+            'name' => 'editar_empresa',
             'guard_name' => 'web',
         ]);
 
-        // permisos estado
+        // permisos impuestos
 
-        // Permission::create([
-        //     'name' => 'crear_estado',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_estado',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_estado',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_estado',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_estado',
-        //     'guard_name' => 'web',
-        // ]);
+        Permission::create([
+            'name' => 'crear_impuesto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_impuesto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_impuesto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_impuesto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_impuesto',
+            'guard_name' => 'web',
+        ]);
 
         // // permisos medico
 

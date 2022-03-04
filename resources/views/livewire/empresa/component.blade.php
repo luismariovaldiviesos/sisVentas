@@ -13,6 +13,8 @@
 
 
             <div class="widget-content">
+                @can('ver_empresa')
+
 
                 <div class="row">
                     <div class="col-sm-12 col-md-3">
@@ -123,15 +125,23 @@
 
             </div>
 
+
         </div>
         <br>
+
+        @endcan
         <div>
 
-           <button type="button" wire:click.prevent="Guardar()" class="btn btn-dark close-modal">
-            Guardar
-        </button>
+            @can('editar_empresa')
+            <button type="button" wire:click.prevent="Guardar()" class="btn btn-dark close-modal">
+                Guardar
+                </button>
+            @endcan
+
 
         </div>
+
+
 
 
 

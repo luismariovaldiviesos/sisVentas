@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\DespachoController;
+use App\Http\Livewire\CategoriaController;
 use App\Http\Livewire\RolesController;
 use App\Http\Livewire\UsersController;
 use App\Http\Livewire\PermisosController;
 use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\EmpresaController;
+use App\Http\Livewire\ImpuestoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('empresa', EmpresaController::class);
+    Route::get('categorias', CategoriaController::class);
+    Route::get('impuestos', ImpuestoController::class);
 
 
 });
