@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(CategoriaSeeder::class);
         $this->call(ImpuestosSeeder::class);
+        $this->call(ProductoSeeder::class);
 
 
     }

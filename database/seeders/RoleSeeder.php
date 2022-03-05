@@ -90,28 +90,28 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        // // permisos medico
+         // permisos productos
 
-        // Permission::create([
-        //     'name' => 'crear_medico',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_medico',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_medico',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_medico',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_medico',
-        //     'guard_name' => 'web',
-        // ]);
+        Permission::create([
+            'name' => 'crear_producto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_producto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_producto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_producto',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_producto',
+            'guard_name' => 'web',
+        ]);
 
         // // permisos pacientes
 
