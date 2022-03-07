@@ -10,7 +10,7 @@
 
 					<li>
 						<a href="{{url('import')}}" class="tabmenu bg-dark mr-3">Importar</a>
-						@can('product_create')
+						@can('crear_permiso')
 						<a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
 						@endcan
 					</li>
@@ -40,16 +40,16 @@
 							@foreach($data as $product)
 							<tr>
 								<td>
-									<h6 class="text-left">{{$product->name}}</h6>
+									<h6 class="text-left">{{$product->nombre}}</h6>
 								</td>
 								<td>
 									<h6 class="text-center">{{$product->barcode}}</h6>
 								</td>
 								<td>
-									<h6 class="text-center">{{$product->category}}</h6>
+									<h6 class="text-center">{{$product->categoria}}</h6>
 								</td>
 								<td>
-									<h6 class="text-center">{{$product->price}}</h6>
+									<h6 class="text-center">{{$product->precio}}</h6>
 								</td>
 
 
@@ -61,7 +61,7 @@
 
 
 								<td>
-									<h6 class="text-center">{{$product->alerts}}</h6>
+									<h6 class="text-center">{{$product->alertas}}</h6>
 								</td>
 
 								<td class="text-center">
@@ -71,17 +71,18 @@
 								</td>
 
 								<td class="text-center">
-									@can('product_update')
+									@can('editar_producto')
 									<a href="javascript:void(0)" wire:click.prevent="Edit({{$product->id}})" class="btn btn-dark mtmobile" title="Edit">
 										<i class="fas fa-edit"></i>
 									</a>
 
 									@endcan
-									@can('product_destroy')
-									@if($product->ventas->count() < 1) <a href="javascript:void(0)" onclick="Confirm('{{$product->id}}')" class="btn btn-dark" title="Delete">
+									@can('eliminar_producto')
+									{{-- @if($product->ventas->count() < 1)  --}}
+                                        <a href="javascript:void(0)" onclick="Confirm('{{$product->id}}')" class="btn btn-dark" title="Delete">
 										<i class="fas fa-trash"></i>
 										</a>
-										@endif
+									{{-- @endif --}}
 										@endcan
 										<button type="button" wire:click.prevent="ScanCode('{{$product->barcode}}')" class="btn btn-dark"><i class="fas fa-shopping-cart"></i></button>
 								</td>
@@ -100,7 +101,7 @@
 
 	</div>
 
-	@include('livewire.products.form')
+	@include('livewire.productos.form')
 </div>
 
 

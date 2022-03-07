@@ -35,3 +35,8 @@ dentro de la carpeta controladores:
     ctr_pdf crea el pdf crea el pdf de la factura
     ctr_funciones
 
+
+
+    -------------------------------------------------------------
+    desde productos agrarga al carro eso falta
+
