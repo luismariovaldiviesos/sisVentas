@@ -32,7 +32,8 @@
 								<th class="table-th text-white text-center">PRECIO</th>
 								<th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
-								<th class="table-th text-white text-center">IMLUESTOS</th>
+								<th class="table-th text-white text-center">IMPUESTOS</th>
+                                <th class="table-th text-white text-center">PROVEEDOR</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
 						</thead>
@@ -67,6 +68,12 @@
 								<td class="text-center">
                                     @foreach ($product->impuestos as $imp )
                                    <span class="badge badge-success"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
+                                    @endforeach
+								</td>
+
+                                <td class="text-center">
+                                    @foreach ($product->proveedores as $prov )
+                                   <span class="badge badge-success"><h6 class="text-center">{{$prov->nombre}}</h6></span>
                                     @endforeach
 								</td>
 

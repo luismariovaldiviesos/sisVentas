@@ -28,5 +28,11 @@ class Producto extends Model
 		return $this->hasMany(SaleDetail::class);
 	}
 
+      // un producto puede tener varios proveedores
+   public function proveedores()
+   {
+        return $this->belongsToMany(Proveedor::class,'productos_proveedor');
+    }
+
 
 }

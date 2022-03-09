@@ -82,6 +82,21 @@
             {{-- @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror --}}
         </div>
     </div>
+
+    <div class="col-sm-12 col-md-12">
+        <div class="form-group">
+            <label>Proveedor</label>
+            @foreach($proveedores as $proveedor)
+            <div class="mt-1">
+                   <label class="inline-flex items-center">
+                   <input type="checkbox" value="{{ $proveedor->id }}" wire:model="selectedProveedores"  class="form-checkbox h-6 w-6 text-green-500">
+                        <span class="ml-3 text-sm">{{$proveedor->nombre}}</span>
+                    </label>
+               </div>
+            @endforeach
+            {{-- @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror --}}
+        </div>
+    </div>
 </div>
 
 {{-- <div class="row mt-3">

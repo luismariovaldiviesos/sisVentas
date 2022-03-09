@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Categoria;
 use App\Models\Impuesto;
 use App\Models\Producto;
+use App\Models\Proveedor;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -19,6 +20,8 @@ class ProductosController extends Component
 	private $pagination = 5;
 
     public $selectedImpuestos =[];
+
+    public $selectedProveedores =[];
 
     public function paginationView()
 	{
@@ -53,7 +56,8 @@ class ProductosController extends Component
 		return view('livewire.productos.component', [
 			'data' => $products,
 			'categorias' => Categoria::orderBy('nombre', 'asc')->get(),
-            'impuestos' => Impuesto::orderBy('id','asc')->get()
+            'impuestos' => Impuesto::orderBy('id','asc')->get(),
+            'proveedores' => Proveedor::orderBy('id','asc')->get()
 		])
 		->extends('layouts.theme.app')
 		->section('content');
@@ -95,6 +99,7 @@ class ProductosController extends Component
 			'categoria_id' => $this->categoria_id
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
+        $product->proveedores()->sync($this->selectedProveedores, true);
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
@@ -168,6 +173,7 @@ class ProductosController extends Component
 			'categoria_id' => $this->categoria_id
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
+        $product->proveedores()->sync($this->selectedProveedores, true);
 	    $this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
 	}
