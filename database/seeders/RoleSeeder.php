@@ -115,30 +115,27 @@ class RoleSeeder extends Seeder
 
         // // permisos pacientes
 
-        // Permission::create([
-        //     'name' => 'crear_paciente',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_paciente',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_paciente',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_paciente',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_paciente',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'detalle_paciente',
-        //     'guard_name' => 'web',
-        // ]);
+        Permission::create([
+            'name' => 'crear_proveedor',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_proveedor',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_proveedor',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_proveedor',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_proveedor',
+            'guard_name' => 'web',
+        ]);
+
 
         //  // permisos pago deshabilitado
 

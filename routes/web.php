@@ -10,6 +10,7 @@ use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\EmpresaController;
 use App\Http\Livewire\ImpuestoController;
 use App\Http\Livewire\ProductosController;
+use App\Http\Livewire\ProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('categorias', CategoriaController::class);
     Route::get('impuestos', ImpuestoController::class);
     Route::get('productos', ProductosController::class);
+    Route::get('proveedores', ProveedorController::class);
 
 
 });
