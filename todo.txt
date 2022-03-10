@@ -37,6 +37,8 @@ dentro de la carpeta controladores:
 
 
 
-    -------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------
     desde productos agrarga al carro eso falta
+    que los impuestos y proveedores en productos se visualicen en el check cuando se va a editar
+    -----------------------------------------------------------------------------------------------
 
