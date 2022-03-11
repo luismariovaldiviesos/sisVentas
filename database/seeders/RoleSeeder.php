@@ -137,28 +137,32 @@ class RoleSeeder extends Seeder
         ]);
 
 
-        //  // permisos pago deshabilitado
+        //  // permisos ingresos
 
-        // //  Permission::create([
-        // //     'name' => 'crear_pago',
-        // //     'guard_name' => 'web',
-        // // ]);
-        // // Permission::create([
-        // //     'name' => 'ver_pago',
-        // //     'guard_name' => 'web',
-        // // ]);
-        // // Permission::create([
-        // //     'name' => 'buscar_pago',
-        // //     'guard_name' => 'web',
-        // // ]);
-        // // Permission::create([
-        // //     'name' => 'editar_pago',
-        // //     'guard_name' => 'web',
-        // // ]);
-        // // Permission::create([
-        // //     'name' => 'eliminar_pago',
-        // //     'guard_name' => 'web',
-        // // ]);
+         Permission::create([
+            'name' => 'crear_ingreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_ingreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_ingreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_ingreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_ingreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'detalle_ingreso',
+            'guard_name' => 'web',
+        ]);
 
         // // permisos tratamiento
 
