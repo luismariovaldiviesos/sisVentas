@@ -70,6 +70,14 @@ class IngresoController extends Component
 		->section('content');
     }
 
+    public function guardarIngreso()
+    {
+        dd('ingrso');
+    }
+
+
+
+
 
 
 
