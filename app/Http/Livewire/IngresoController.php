@@ -70,10 +70,18 @@ class IngresoController extends Component
 		->section('content');
     }
 
-    public function guardarIngreso()
+    protected $listeners = [
+
+        'detalles' => 'Detalles'
+    ];
+
+    public function Detalles($id_producto,$cantidades,$total)
     {
-        dd('ingrso');
+
+        dd( 'vamos a guradar en ingreso:: proveedor_id', $this->proveedor_id,
+            'productos: ', $id_producto, 'cantidades', $cantidades, 'total ingreso ', $total);
     }
+
 
 
 

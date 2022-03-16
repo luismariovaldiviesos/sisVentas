@@ -94,167 +94,165 @@
 	</div>
 
 	{{-- @include('livewire.ingresos.form') --}}
+
+    <div  class="modal fade" id="modalIngreso" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-dark">
+              <h5 class="text-white modal-title">
+                  <b>Nuevo ingreso</b>
+              </h5>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                     <div class="col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <label >Proveedor</label>
+                            <div class="form-group">
+
+                                <select wire:model.defer="proveedor_id" class="form-control">
+                                    <option value="Elegir" selected>Elegir</option>
+                                    @foreach ($proveedores as $p )
+                                    <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                @error('proveedor_id') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                     </div>
+
+
+                       <div class="mt-2 col-sm-6">
+                            <div class="form-group">
+                                <label>Tipo Identificador</label>
+                                <select wire:model.defer='tipoidentificador' class="form-control">
+                                    <option value="Elegir" disabled>Elegir</option>
+                                    <option value="factura" >Factura</option>
+                                    <option value="nota de venta" >Nota de Venta</option>
+                                    <option value="guia" >Guia</option>
+                                    <option value="otrs" >otros</option>
+                                </select>
+                                @error('proveedor_id') <span class="text-danger er">{{ $message}}</span>@enderror
+                            </div>
+                        </div>
+
+                        <div class="mt-2 col-sm-6">
+
+                            <div class="form-group">
+                                <label >Valor Identificador</label>
+                                <input type="text" wire:model.defer="valoridentificador"
+                                class="form-control" placeholder="001-002-003" autofocus >
+                                @error('valoridentificador') <span class="text-danger er">{{ $message}}</span>@enderror
+                            </div>
+                        </div>
+
+                </div>
+
+                <br><br>
+
+                {{-- <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <button type="button"  class="btn btn-dark close-modal">
+                            AGREGAR DETALLE
+                        </button>
+                    </div>
+                </div> --}}
+
+                <br>
+
+
+                {{-- TABLA PARA EL DETALLE  --}}
+
+                <div class="row">
+
+                    <div class="mt-2 col-sm-6">
+                        <label for="">Producto</label>
+                        <select wire:model.defer="producto_id" class="form-control" name="producto_id" id="producto_id">
+                            <option value="Elegir" selected>Elegir</option>
+                            @foreach ($productos as $p )
+                            <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('producto_id') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mt-2 col-sm-2">
+                        <label >Cantidad</label>
+                        <input type="number" wire:model.defer="cantidad"
+                        class="form-control" autofocus name="cantidad" id="cantidad" >
+                        @error('cantidad') <span class="text-danger er">{{ $message}}</span>@enderror
+                    </div>
+
+                    <div class="mt-2 col-sm-2">
+                        <label >P. Compra</label>
+                        <input type="number"
+                        class="form-control" autofocus  name="preciocompra" id="preciocompra">
+
+                    </div>
+
+                    <br>
+                    <div class="mt-2 col-sm-2">
+                        <label >Agregar </label>
+                        <button type="button" id="btn_add"  class="btn btn-primary">+</button>
+                    </div>
+
+                    {{-- TABLA DEL DETALLE  --}}
+                    <div class="mt-2 col-sm-12">
+                        <table id="detalles" class="table table-bordered table striped mt-1">
+                            <thead class="text-white" style="background: #3B3F5C;">
+                                <th class="table-th text-white text-center">Opciones</th>
+                                <th class="table-th text-white text-center">Producto</th>
+                                <th class="table-th text-white text-center">Cantidad</th>
+                                <th class="table-th text-white text-center">P Compra</th>
+                                <th class="table-th text-white text-center">SubTotal</th>
+                            </thead>
+                            <tfoot>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>TOTAL</th>
+                                <th id="total">$ 0.00</th>
+                            </tfoot>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+            <div class="modal-footer" id="guardar">
+                <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info"
+                    data-dismiss="modal">
+                    CERRAR
+                </button>
+
+
+                    <a href="javascript:void(0)"
+                    onClick="Confirm()"
+                    class="btn btn-dark " title="Delete">
+                       confirmar
+                    </a>
+
+
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
 
 
 
 {{-- MODAL PÁRA INGRESOS --}}
 
-<div wire:ignore.self class="modal fade" id="modalIngreso" tabindex="-1" role="dialog" >
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-dark">
-          <h5 class="text-white modal-title">
-              <b>Nuevo ingreso</b>
-          </h5>
 
-        </div>
-        <div class="modal-body">
-
-            <div class="row">
-                 <div class="col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <label >Proveedor</label>
-                        <div class="form-group">
-
-                            <select wire:model="proveedor_id" class="form-control">
-                                <option value="Elegir" selected>Elegir</option>
-                                @foreach ($proveedores as $p )
-                                <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
-                                @endforeach
-                            </select>
-                            @error('proveedor_id') <span class="error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                 </div>
-
-
-                   <div class="mt-2 col-sm-6">
-                        <div class="form-group">
-                            <label>Tipo Identificador</label>
-                            <select wire:model='tipoidentificador' class="form-control">
-                                <option value="Elegir" disabled>Elegir</option>
-                                <option value="factura" >Factura</option>
-                                <option value="nota de venta" >Nota de Venta</option>
-                                <option value="guia" >Guia</option>
-                                <option value="otrs" >otros</option>
-                            </select>
-                            @error('proveedor_id') <span class="text-danger er">{{ $message}}</span>@enderror
-                        </div>
-                    </div>
-
-                    <div class="mt-2 col-sm-6">
-
-                        <div class="form-group">
-                            <label >Valor Identificador</label>
-                            <input type="text" wire:model.lazy="valoridentificador"
-                            class="form-control" placeholder="001-002-003" autofocus >
-                            @error('valoridentificador') <span class="text-danger er">{{ $message}}</span>@enderror
-                        </div>
-                    </div>
-
-            </div>
-
-            <br><br>
-
-            {{-- <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <button type="button"  class="btn btn-dark close-modal">
-                        AGREGAR DETALLE
-                    </button>
-                </div>
-            </div> --}}
-
-            <br>
-
-
-            {{-- TABLA PARA EL DETALLE  --}}
-
-            <div class="row">
-
-                <div class="mt-2 col-sm-6">
-                    <label for="">Producto</label>
-                    <select wire:model="producto_id" class="form-control" name="producto_id" id="producto_id">
-                        <option value="Elegir" selected>Elegir</option>
-                        @foreach ($productos as $p )
-                        <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
-                        @endforeach
-                    </select>
-                    @error('producto_id') <span class="error">{{ $message }}</span> @enderror
-                </div>
-
-                <div class="mt-2 col-sm-2">
-                    <label >Cantidad</label>
-                    <input type="number" wire:model.lazy="cantidad"
-                    class="form-control" autofocus name="cantidad" id="cantidad" >
-                    @error('cantidad') <span class="text-danger er">{{ $message}}</span>@enderror
-                </div>
-
-                <div class="mt-2 col-sm-2">
-                    <label >P. Compra</label>
-                    <input type="number" wire:model.lazy="preciocompra"
-                    class="form-control" autofocus  name="preciocompra" id="preciocompra">
-                    @error('total') <span class="text-danger er">{{ $message}}</span>@enderror
-                </div>
-{{--
-                <div class="mt-2 col-sm-2">
-                    <label >Total </label>
-                    <input type="text" wire:model.lazy="total"
-                    class="form-control" autofocus name="total" id="total">
-                    @error('total') <span class="text-danger er">{{ $message}}</span>@enderror
-                </div> --}}
-                <br>
-                <div class="mt-2 col-sm-2">
-                    <label >Agregar </label>
-                    <button type="button" id="btn_add"  class="btn btn-primary">+</button>
-                </div>
-
-                {{-- TABLA DEL DETALLE  --}}
-                <div class="mt-2 col-sm-12">
-                    <table id="detalles" class="table table-bordered table striped mt-1">
-                        <thead class="text-white" style="background: #3B3F5C;">
-                            <th class="table-th text-white text-center">Opciones</th>
-                            <th class="table-th text-white text-center">Producto</th>
-                            <th class="table-th text-white text-center">Cantidad</th>
-                            <th class="table-th text-white text-center">P Compra</th>
-                            <th class="table-th text-white text-center">SubTotal</th>
-                        </thead>
-                        <tfoot>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>TOTAL</th>
-                            <th id="total">$ 0.00</th>
-                        </tfoot>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-            </div>
-
-
-
-
-        </div>
-        <div class="modal-footer" id="guardar">
-            <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info"
-                data-dismiss="modal">
-                CERRAR
-            </button>
-
-            {{-- @if ($selected_id < 1) --}}
-                {{-- <button type="button" wire:click.prevent="guardarIngreso()" class="btn btn-dark close-modal">
-                    GUARDAR
-                </button> --}}
-
-
-        </div>
-    </div>
-    </div>
-</div>
 
 
 
@@ -292,7 +290,7 @@
 
 
 
-	function Confirm(id) {
+	function Confirm() {
 
 		swal({
 			title: 'CONFIRMAR',
@@ -305,7 +303,7 @@
 			confirmButtonText: 'Aceptar'
 		}).then(function(result) {
 			if (result.value) {
-				window.livewire.emit('deleteRow', id)
+				window.livewire.emit('detalles',id_producto,cantidades,total)
 				swal.close()
 			}
 
@@ -325,6 +323,8 @@
 var cont =0;
     total = 0;
     subtotal= [];
+    id_producto =[];
+    cantidades = [];
 
     function  agregar()
     {
@@ -336,21 +336,31 @@ var cont =0;
 
         if (producto_id!="" && cantidad!="" && preciocompra!="")
         {
-            console.log(cantidad,preciocompra );
             subtotal[cont]=(cantidad*preciocompra);
             total = total+subtotal[cont];
             var fila  =  '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="id_producto[]" value="'+producto_id+'">'+producto+'</td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td></td><td><input type="number" name="preciocompra[]" value="'+preciocompra+'"></td><td>'+subtotal[cont]+'</td></tr>';
+            id_producto[cont] =  producto_id;
+            cantidades[cont] = cantidad;
             cont ++;
             limpiar();
             $("#total").html(total);
-            console.log(total);
             evaluar();
             $("#detalles").append(fila);
+            console.log('ides productos' + ' ' + id_producto);
+            console.log('cantidades ingresos' + ' ' + cantidades);
+            console.log('tatal ingreso ' + ' ' + total);
+
 
         }
         else{
             alert("error al ingresar los detalles del ingreso");
         }
+        // if(activar  = 1){
+        //     window.livewire.emit('detalles', id_producto,cantidades,total);
+        // }
+
+
+
     }
 
     function limpiar(){
