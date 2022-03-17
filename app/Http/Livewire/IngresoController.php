@@ -78,8 +78,13 @@ class IngresoController extends Component
     public function Detalles($id_producto,$cantidades,$total)
     {
 
-        dd( 'vamos a guradar en ingreso:: proveedor_id', $this->proveedor_id,
-            'productos: ', $id_producto, 'cantidades', $cantidades, 'total ingreso ', $total);
+        // dd( 'vamos a guradar en ingreso:: proveedor_id', $this->proveedor_id,
+        //     'productos: ', $id_producto, 'cantidades', $cantidades, 'total ingreso ', $total);
+
+        dd(
+            'array de  ides productos --> ', collect($id_producto)->all(),
+            'array de   cantidades --> ', collect($cantidades)->all()
+        );
     }
 
 
