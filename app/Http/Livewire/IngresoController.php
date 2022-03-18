@@ -8,7 +8,7 @@ use App\Models\Proveedor;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-
+use DB;
 class IngresoController extends Component
 {
 
@@ -16,7 +16,17 @@ class IngresoController extends Component
     use WithPagination;
 	use WithFileUploads;
 
-    public $proveedor_id,$user_id,$tipoidentificador,$valoridentificador,$ingreso_id,$producto_id,$cantidad,$total, $search,$selected_id,$pageTitle,$componentName;
+    // variables ingrso
+    public $proveedor_id,$user_id,$tipoidentificador,
+    $valoridentificador, $totalingreso,
+
+    // variables detalle ingreso
+    $ingreso_id,$producto_id,
+    $cantidad,$preciocompra,
+
+    // variables componente
+    $search,$selected_id,
+    $pageTitle,$componentName;
 	private $pagination = 5;
 
     public function resetUI()
@@ -72,19 +82,47 @@ class IngresoController extends Component
 
     protected $listeners = [
 
-        'detalles' => 'Detalles'
+        'guardaIngreso' => 'guardaIngreso'
     ];
 
-    public function Detalles($id_producto,$cantidades,$total)
+    public function guardaIngreso($arregloproductos,$arreglocantidades,$arreglosprecioscompra,$totalingreso)
     {
 
-        // dd( 'vamos a guradar en ingreso:: proveedor_id', $this->proveedor_id,
-        //     'productos: ', $id_producto, 'cantidades', $cantidades, 'total ingreso ', $total);
 
-        dd(
-            'array de  ides productos --> ', collect($id_producto)->all(),
-            'array de   cantidades --> ', collect($cantidades)->all()
-        );
+        //dd('empezamos transaccion');
+
+        DB::beginTransaction();
+        try{
+
+            $ingreso =  Ingreso::create([
+                'proveedor_id' => $this->proveedor_id,
+                'user_id' =>  Auth()->user()->id,
+                'tipoidientificador' => $this->tipoidentificador,
+                'valoridentificador' => $this->valoridentificador,
+                'totalingreso' => $totalingreso
+            ]);
+
+            if($ingreso){
+
+            }
+
+        }
+        catch (Exception $e) {
+			DB::rollback();
+			$this->emit('sale-error', $e->getMessage());
+		}
+
+
+        // dd(
+        //     'datos de ingrso --> proveedor_id', $this->proveedor_id,
+        //     'datos de ingrso --> user id', $this->user_id,
+        //     'datos de ingrso --> tipo idientificado', $this->tipoidentificador,
+        //     'datos de ingrso --> valor indentificador', $this->valoridentificador,
+        //     'datos de ingrso --> total ingreso ', $totalingreso,
+        //     'array de  ides productos --> ', collect($arregloproductos)->all(),
+        //     'array de   cantidades --> ', collect($arreglocantidades)->all(),
+        //     'array de   precios de compra --> ', collect($arreglosprecioscompra)->all(),
+        // );
     }
 
 

@@ -34,6 +34,7 @@
 								<th class="table-th text-white text-center">USUARIO</th>
 								<th class="table-th text-white text-center">NUMERO INGRESO</th>
                                 <th class="table-th text-white text-center">FECHA INGRESO</th>
+                                <th class="table-th text-white text-center">TOTAL INGRESO</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
 						</thead>
@@ -44,13 +45,16 @@
 									<h6 class="text-left">{{$ingreso->proveedor->nombre}}</h6>
 								</td>
 								<td>
-									<h6 class="text-center">{{$ingreso->usuario->name}}</h6>
+									<h6 class="text-center">{{$ingreso->user->name}}</h6>
 								</td>
 								<td>
 									<h6 class="text-center">{{$ingreso->valoridentificador}}</h6>
 								</td>
                                 <td>
 									<h6 class="text-center">{{$ingreso->created_at}}</h6>
+								</td>
+                                <td>
+									<h6 class="text-center">{{$ingreso->totalingreso}}</h6>
 								</td>
 
 								<td class="text-center">
@@ -111,14 +115,13 @@
                         <div class="form-group">
                             <label >Proveedor</label>
                             <div class="form-group">
-
-                                <select wire:model.defer="proveedor_id" class="form-control">
-                                    <option value="Elegir" selected>Elegir</option>
+                                <select wire:model.defer="proveedor_id" class="form-control" required>
+                                    <option ></option>
                                     @foreach ($proveedores as $p )
                                     <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
                                     @endforeach
                                 </select>
-                                @error('proveedor_id') <span class="error">{{ $message }}</span> @enderror
+
                             </div>
                         </div>
                      </div>
@@ -152,13 +155,6 @@
 
                 <br><br>
 
-                {{-- <div class="row">
-                    <div class="col-sm-12 col-md-4">
-                        <button type="button"  class="btn btn-dark close-modal">
-                            AGREGAR DETALLE
-                        </button>
-                    </div>
-                </div> --}}
 
                 <br>
 
@@ -303,7 +299,7 @@
 			confirmButtonText: 'Aceptar'
 		}).then(function(result) {
 			if (result.value) {
-				window.livewire.emit('detalles',id_producto,cantidades,total)
+				window.livewire.emit('guardaIngreso',arregloproductos,arreglocantidades,arreglosprecioscompra,totalingreso)
 				swal.close()
 			}
 
@@ -321,10 +317,11 @@
 
 
 var cont =0;
-    total = 0;
+    totalingreso = 0;
     subtotal= [];
-    id_producto =[];
-    cantidades = [];
+    arregloproductos =[];
+    arreglocantidades = [];
+    arreglosprecioscompra = [];
 
     function  agregar()
     {
@@ -337,30 +334,25 @@ var cont =0;
         if (producto_id!="" && cantidad!="" && preciocompra!="")
         {
             subtotal[cont]=(cantidad*preciocompra);
-            total = total+subtotal[cont];
-            var fila  =  '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="id_producto[]" value="'+producto_id+'">'+producto+'</td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td></td><td><input type="number" name="preciocompra[]" value="'+preciocompra+'"></td><td>'+subtotal[cont]+'</td></tr>';
-            id_producto[cont] =  producto_id;
-            cantidades[cont] = cantidad;
+            totalingreso = totalingreso+subtotal[cont];
+            var fila  =  '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="arregloproductos[]" value="'+producto_id+'">'+producto+'</td><td><input type="number" name="cantidad[]" value="'+cantidad+'"></td></td><td><input type="number" name="arreglosprecioscompra[]" value="'+preciocompra+'"></td><td>'+subtotal[cont]+'</td></tr>';
+            arregloproductos[cont] =  producto_id;
+            arreglocantidades[cont] = cantidad;
+            arreglosprecioscompra[cont] = preciocompra;
             cont ++;
             limpiar();
-            $("#total").html(total);
+            $("#total").html(totalingreso);
             evaluar();
             $("#detalles").append(fila);
-            console.log('ides productos' + ' ' + id_producto);
-            console.log('cantidades ingresos' + ' ' + cantidades);
-            console.log('tatal ingreso ' + ' ' + total);
+            console.log('ides productos' + ' ' + arregloproductos);
+            console.log('arreglocantidades ingresos' + ' ' + arreglocantidades);
+
 
 
         }
         else{
             alert("error al ingresar los detalles del ingreso");
         }
-        // if(activar  = 1){
-        //     window.livewire.emit('detalles', id_producto,cantidades,total);
-        // }
-
-
-
     }
 
     function limpiar(){
@@ -370,7 +362,7 @@ var cont =0;
 
     function evaluar()
     {
-        if(total > 0){
+        if(totalingreso > 0){
             $('#guardar').show();
         }
         else
@@ -380,8 +372,8 @@ var cont =0;
     }
 
     function eliminar(index){
-        total = total-subtotal[index];
-        $("#total").html(total);
+        totalingreso = totalingreso-subtotal[index];
+        $("#total").html(totalingreso);
         $("#fila" + index).remove();
         evaluar();
     }

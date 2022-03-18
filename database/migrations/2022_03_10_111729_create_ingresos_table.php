@@ -17,11 +17,12 @@ class CreateIngresosTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('proveedor_id');
-            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
-            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('tipoidentificador');  // factura nota de venta guia otro
             $table->string('valoridentificador');
+            $table->decimal('totalingreso');
             $table->timestamps();
         });
     }

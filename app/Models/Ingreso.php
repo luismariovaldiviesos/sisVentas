@@ -9,11 +9,11 @@ class Ingreso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['proveedor_id','usuario_id','tipoidentificador','valoridentificador'];
+    protected $fillable = ['proveedor_id','user_id','tipoidentificador','valoridentificador','totalingreso'];
 
 
     // un ingreso pertenece a un usuario (que ingresa)
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

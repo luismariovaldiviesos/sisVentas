@@ -10,5 +10,5 @@ class DetalleIngreso extends Model
     use HasFactory;
     protected $table = 'detalle_ingreso';
 
-    protected $fillable = ['ingreso_id','producto_id','cantidad','total'];
+    protected $fillable = ['ingreso_id','producto_id','cantidad','preciocompra','total'];
 }
