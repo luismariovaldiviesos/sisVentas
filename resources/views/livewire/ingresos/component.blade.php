@@ -125,6 +125,10 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
+        window.livewire.on('ingreso-error', Msg => {
+            $('#theModal').modal('hide')
+            noty(Msg)
+        })
 
 		window.livewire.on('show-modal', msg => {
 			$('#theModal').modal('show')
@@ -148,7 +152,7 @@
 
 		swal({
 			title: 'CONFIRMAR',
-			text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+			text: '¿CONFIRMAS GUARDAR EL INGRESO?',
 			type: 'warning',
 			showCancelButton: true,
 			cancelButtonText: 'Cerrar',
@@ -167,11 +171,6 @@
 
 // CODIGO PARA SUMAR DETALLES
 
-
-
-// $(document).ready(function(){
-
-// });
 
 
 var cont =0;
@@ -216,6 +215,7 @@ var cont =0;
     function limpiar(){
         $('#cantidad').val("");
         $('#preciocompra').val("");
+        $('#producto_id').val("Elegir");
     }
 
     function evaluar()
@@ -235,10 +235,6 @@ var cont =0;
         $("#fila" + index).remove();
         evaluar();
     }
-
-
-
-
 
 </script>
 

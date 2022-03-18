@@ -34,16 +34,14 @@ class IngresoController extends Component
 	{
 		$this->proveedor_id ='';
 		$this->user_id ='';
-		$this->tipoidentificador ='';
+		$this->tipoidentificador ='Elegir';
 		$this->valoridentificador ='';
 		$this->ingreso_id ='';
 		$this->producto_id ='';
 		$this->search ='';
         $this->total ="";
-		$this->cantidad='Elegir';
+		$this->cantidad='';
 	    $this->selected_id = 0;
-
-
 
 	}
 
@@ -58,7 +56,6 @@ class IngresoController extends Component
 	{
 		$this->pageTitle = 'Listado';
 		$this->componentName = 'Ingreso de Mercaderia';
-		$this->categoryid = 'Elegir';
 
 	}
 
@@ -88,9 +85,23 @@ class IngresoController extends Component
 
     public function guardaIngreso($arregloproductos,$arreglocantidades,$arreglosprecioscompra,$totalingreso)
     {
+        $rules  =[
+			'proveedor_id' => 'required',
+			'tipoidentificador' => 'required|not_in:Elegir',
+			'valoridentificador' => 'required'
 
 
+		];
 
+		$messages = [
+			'proveedor_id.required' => 'Nombre del provvedor requerido',
+            'tipoidentificador.required' => 'Tipo identificador requerido',
+			'tipoidentificador.not_in' => 'Elige un identificadora diferente de Elegir',
+            'valoridentificador.required' => 'valor identificador requerido'
+
+		];
+
+		$this->validate($rules, $messages);
 
         DB::beginTransaction();
         try{
@@ -124,32 +135,19 @@ class IngresoController extends Component
                 }
             }
             DB::commit();
+            $this->resetUI();
+            $arregloproductos = [];
+            $arreglocantidades = [];
+            $arreglosprecioscompra = [];
+            $totalingreso = 0;
             $this->emit('ingreso-ok','Ingreso de mercaderia registrado con éxito');
 
         }
         catch (Exception $e) {
 			DB::rollback();
-			$this->emit('sale-error', $e->getMessage());
+			$this->emit('ingreso-error', $e->getMessage());
 		}
-
-
-        // dd(
-        //     'datos de ingrso --> proveedor_id', $this->proveedor_id,
-        //     'datos de ingrso --> user id', $this->user_id,
-        //     'datos de ingrso --> tipo idientificado', $this->tipoidentificador,
-        //     'datos de ingrso --> valor indentificador', $this->valoridentificador,
-        //     'datos de ingrso --> total ingreso ', $totalingreso,
-        //     'array de  ides productos --> ', collect($arregloproductos)->all(),
-        //     'array de   cantidades --> ', collect($arreglocantidades)->all(),
-        //     'array de   precios de compra --> ', collect($arreglosprecioscompra)->all(),
-        // );
     }
-
-
-
-
-
-
 
 
 

@@ -1,13 +1,14 @@
 @include('common.modalHead')
 
 
+                 {{-- CABECERA   --}}
                 <div class="row">
                      <div class="col-sm-12 col-md-12">
                         <div class="form-group">
                             <label >Proveedor</label>
                             <div class="form-group">
                                 <select wire:model.lazy="proveedor_id" class="form-control" required>
-                                    <option ></option>
+                                    <option value="Elegir" selected>Elegir</option>
                                     @foreach ($proveedores as $p )
                                     <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
                                     @endforeach
@@ -42,10 +43,7 @@
 
                 </div>
 
-                <br><br>
-
-
-                <br>
+                <br><br><br>
 
 
                 {{-- TABLA PARA EL DETALLE   --}}
@@ -107,19 +105,18 @@
                     </div>
                 </div>
 
-            <div class="modal-footer" id="guardar">
-                <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info"
-                    data-dismiss="modal">
-                    CERRAR
-                </button>
-
-
-                    <a href="javascript:void(0)"
-                    onClick="Confirm()"
-                    class="btn btn-dark " title="Delete">
-                       confirmar
-                    </a>
-            </div>
+                 {{-- FOOTER  --}}
+                <div class="modal-footer" id="guardar">
+                    <button type="button" wire:click.prevent="resetUI()" class="btn btn-dark close-btn text-info"
+                        data-dismiss="modal">
+                        CERRAR
+                    </button>
+                        <a href="javascript:void(0)"
+                        onClick="Confirm()"
+                        class="btn btn-dark ">
+                        GUARDAR
+                        </a>
+                </div>
 
 
 
