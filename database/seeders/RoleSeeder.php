@@ -151,10 +151,7 @@ class RoleSeeder extends Seeder
             'name' => 'buscar_ingreso',
             'guard_name' => 'web',
         ]);
-        Permission::create([
-            'name' => 'editar_ingreso',
-            'guard_name' => 'web',
-        ]);
+
         Permission::create([
             'name' => 'eliminar_ingreso',
             'guard_name' => 'web',

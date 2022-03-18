@@ -151,13 +151,7 @@ class IngresoController extends Component
     }
 
 
-    public function Edit(Ingreso $ingreso)
-    {
-        dd('editar ingreso ', $ingreso);
-    }
-
-
-    public function eliminarIngreso(Ingreso $ingreso){
+   public function eliminarIngreso(Ingreso $ingreso){
         dd('eliminar ingreso ', $ingreso);
     }
 

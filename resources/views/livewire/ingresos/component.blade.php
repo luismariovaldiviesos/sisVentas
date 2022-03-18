@@ -58,12 +58,7 @@
 								</td>
 
 								<td class="text-center">
-									@can('editar_ingreso')
-									<a href="javascript:void(0)" wire:click.prevent="Edit({{$ingreso->id}})" class="btn btn-dark mtmobile" title="Edit">
-										<i class="fas fa-edit"></i>
-									</a>
 
-									@endcan
                                     @can('detalle_ingreso')
                                     <button wire:click.prevent="detalleIngreso({{$ingreso->id}})"
                                         class="btn btn-dark btn-sm">
