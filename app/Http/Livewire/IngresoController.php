@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DetalleIngreso;
 use App\Models\Ingreso;
 use App\Models\Producto;
 use App\Models\Proveedor;
@@ -89,40 +90,59 @@ class IngresoController extends Component
     {
 
 
-        //dd('empezamos transaccion');
-
-        // DB::beginTransaction();
-        // try{
-
-        //     $ingreso =  Ingreso::create([
-        //         'proveedor_id' => $this->proveedor_id,
-        //         'user_id' =>  Auth()->user()->id,
-        //         'tipoidentificador' => $this->tipoidentificador,
-        //         'valoridentificador' => $this->valoridentificador,
-        //         'totalingreso' => $totalingreso
-        //     ]);
-
-        //     if($ingreso){
-
-        //     }
-
-        // }
-        // catch (Exception $e) {
-		// 	DB::rollback();
-		// 	$this->emit('sale-error', $e->getMessage());
-		// }
 
 
-        dd(
-            'datos de ingrso --> proveedor_id', $this->proveedor_id,
-            'datos de ingrso --> user id', $this->user_id,
-            'datos de ingrso --> tipo idientificado', $this->tipoidentificador,
-            'datos de ingrso --> valor indentificador', $this->valoridentificador,
-            'datos de ingrso --> total ingreso ', $totalingreso,
-            'array de  ides productos --> ', collect($arregloproductos)->all(),
-            'array de   cantidades --> ', collect($arreglocantidades)->all(),
-            'array de   precios de compra --> ', collect($arreglosprecioscompra)->all(),
-        );
+        DB::beginTransaction();
+        try{
+
+            $ingreso =  Ingreso::create([
+                'proveedor_id' => $this->proveedor_id,
+                'user_id' =>  Auth()->user()->id,
+                'tipoidentificador' => $this->tipoidentificador,
+                'valoridentificador' => $this->valoridentificador,
+                'totalingreso' => $totalingreso
+            ]);
+
+            if($ingreso){
+
+                $cont  =0;
+                while($cont < count($arregloproductos))
+                {
+                    DetalleIngreso::create([
+                    'ingreso_id' => $ingreso->id,
+                    'producto_id' => $arregloproductos[$cont],
+                    'cantidad' => $arreglocantidades[$cont],
+                    'preciocompra' => $arreglosprecioscompra[$cont]
+                    ]);
+
+                    //stock
+                    $producto  = Producto::find($arregloproductos[$cont]);
+                    $producto->stock = $producto->stock + intval($arreglocantidades[$cont]);
+                    $producto->save();
+                    //aumentamos contador
+                    $cont =  $cont +1;
+                }
+            }
+            DB::commit();
+            $this->emit('ingreso-ok','Ingreso de mercaderia registrado con éxito');
+
+        }
+        catch (Exception $e) {
+			DB::rollback();
+			$this->emit('sale-error', $e->getMessage());
+		}
+
+
+        // dd(
+        //     'datos de ingrso --> proveedor_id', $this->proveedor_id,
+        //     'datos de ingrso --> user id', $this->user_id,
+        //     'datos de ingrso --> tipo idientificado', $this->tipoidentificador,
+        //     'datos de ingrso --> valor indentificador', $this->valoridentificador,
+        //     'datos de ingrso --> total ingreso ', $totalingreso,
+        //     'array de  ides productos --> ', collect($arregloproductos)->all(),
+        //     'array de   cantidades --> ', collect($arreglocantidades)->all(),
+        //     'array de   precios de compra --> ', collect($arreglosprecioscompra)->all(),
+        // );
     }
 
 

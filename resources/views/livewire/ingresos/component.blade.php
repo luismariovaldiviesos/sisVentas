@@ -113,7 +113,7 @@
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 
-		window.livewire.on('impuesto-added', Msg => {
+		window.livewire.on('ingreso-ok', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })

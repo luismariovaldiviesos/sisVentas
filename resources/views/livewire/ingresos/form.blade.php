@@ -12,7 +12,7 @@
                                     <option value="{{ $p->id }}" >{{ $p->nombre }}</option>
                                     @endforeach
                                 </select>
-
+                                @error('proveedor_id') <span class="text-danger er">{{ $message}}</span>@enderror
                             </div>
                         </div>
                      </div>
@@ -26,7 +26,7 @@
                                     <option value="guia" >Guia</option>
                                     <option value="otrs" >otros</option>
                                 </select>
-                                @error('proveedor_id') <span class="text-danger er">{{ $message}}</span>@enderror
+                                @error('tipoidentificador') <span class="text-danger er">{{ $message}}</span>@enderror
                             </div>
                         </div>
 

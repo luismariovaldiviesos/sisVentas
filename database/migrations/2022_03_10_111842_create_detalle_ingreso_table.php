@@ -21,7 +21,6 @@ class CreateDetalleIngresoTable extends Migration
             $table->foreign('ingreso_id')->references('id')->on('ingresos')->onDelete('cascade');
             $table->integer('cantidad');
             $table->decimal('preciocompra');
-            $table->decimal('total');
             $table->timestamps();
         });
     }
