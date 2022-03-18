@@ -64,17 +64,19 @@
 									</a>
 
 									@endcan
+                                    @can('detalle_ingreso')
+                                    <button wire:click.prevent="detalleIngreso({{$ingreso->id}})"
+                                        class="btn btn-dark btn-sm">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                   @endcan
 									@can('eliminar_ingreso')
-									 <a href="javascript:void(0)" onclick="Confirm('{{$ingreso->id}}')" class="btn btn-dark" title="Delete">
+									 <a href="javascript:void(0)" onclick="eliminarIngreso('{{$ingreso->id}}')" class="btn btn-dark" title="Delete">
 										<i class="fas fa-trash"></i>
 									</a>
 									@endcan
 
-                                    @can('eliminar_ingreso')
-									 <a href="javascript:void(0)" onclick="Confirm('{{$ingreso->id}}')" class="btn btn-dark" title="Delete">
-                                        <i class="fas fa-list"></i>
-									</a>
-									@endcan
+
 
 
 
@@ -167,6 +169,26 @@
 
 		})
 	}
+
+	function eliminarIngreso(id) {
+
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL INGRESO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonColor: '#3B3F5C',
+            confirmButtonText: 'Aceptar'
+        }).then(function(result) {
+            if (result.value) {
+                window.livewire.emit('deleteRow',id)
+                swal.close()
+            }
+
+        })
+    }
 
 
 // CODIGO PARA SUMAR DETALLES

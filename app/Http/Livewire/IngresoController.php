@@ -80,7 +80,8 @@ class IngresoController extends Component
 
     protected $listeners = [
 
-        'guardaIngreso' => 'guardaIngreso'
+        'guardaIngreso' => 'guardaIngreso',
+        'deleteRow' => 'eliminarIngreso'
     ];
 
     public function guardaIngreso($arregloproductos,$arreglocantidades,$arreglosprecioscompra,$totalingreso)
@@ -147,6 +148,21 @@ class IngresoController extends Component
 			DB::rollback();
 			$this->emit('ingreso-error', $e->getMessage());
 		}
+    }
+
+
+    public function Edit(Ingreso $ingreso)
+    {
+        dd('editar ingreso ', $ingreso);
+    }
+
+
+    public function eliminarIngreso(Ingreso $ingreso){
+        dd('eliminar ingreso ', $ingreso);
+    }
+
+    public function detalleIngreso(Ingreso $ingreso){
+        dd('ver detalle', $ingreso);
     }
 
 
