@@ -97,7 +97,7 @@ class IngresoController extends Component
             $ingreso =  Ingreso::create([
                 'proveedor_id' => $this->proveedor_id,
                 'user_id' =>  Auth()->user()->id,
-                'tipoidientificador' => $this->tipoidentificador,
+                'tipoidentificador' => $this->tipoidentificador,
                 'valoridentificador' => $this->valoridentificador,
                 'totalingreso' => $totalingreso
             ]);
