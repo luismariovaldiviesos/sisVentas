@@ -25,7 +25,8 @@
                                     <option value="factura" >Factura</option>
                                     <option value="nota de venta" >Nota de Venta</option>
                                     <option value="guia" >Guia</option>
-                                    <option value="otrs" >otros</option>
+                                    <option value="documento interno" >Documento interno</option>
+                                    <option value="otros" >otros</option>
                                 </select>
                                 @error('tipoidentificador') <span class="text-danger er">{{ $message}}</span>@enderror
                             </div>
