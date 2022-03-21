@@ -30,6 +30,9 @@ class IngresoController extends Component
     $pageTitle,$componentName;
 	private $pagination = 5;
 
+    // poara detalles
+    public $detalles =[];
+
     public function resetUI()
 	{
 		$this->proveedor_id ='';
@@ -156,7 +159,9 @@ class IngresoController extends Component
     }
 
     public function detalleIngreso(Ingreso $ingreso){
-        dd('ver detalle', $ingreso);
+        $this->detalles = $ingreso->detalles;
+        //dd($this->detalles);
+        $this->emit('show-modal2','details loaded');
     }
 
 

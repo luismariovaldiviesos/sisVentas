@@ -94,14 +94,14 @@
 
 	</div>
 
+    @include('livewire.ingresos.ingreso_detalles')
 	@include('livewire.ingresos.form')
+
 
 
 </div>
 
 
-
-{{-- MODAL PÁRA INGRESOS --}}
 
 
 
@@ -114,10 +114,9 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('impuesto-updated', Msg => {
-            $('#theModal').modal('hide')
-            noty(Msg)
-        })
+        window.livewire.on('show-modal2', msg => {
+			$('#detallesModal').modal('show')
+		});
         window.livewire.on('impuesto-deleted', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)

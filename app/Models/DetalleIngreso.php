@@ -11,4 +11,15 @@ class DetalleIngreso extends Model
     protected $table = 'detalle_ingreso';
 
     protected $fillable = ['ingreso_id','producto_id','cantidad','preciocompra','total'];
+
+
+    // un detalle pertencee a un ingreso
+
+    public function ingreso ()
+    {
+        return $this->belongsTo(Ingreso::class);
+    }
+
+
+
 }

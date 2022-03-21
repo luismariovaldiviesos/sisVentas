@@ -22,4 +22,14 @@ class Ingreso extends Model
     {
         return $this->belongsTo(Proveedor::class);
     }
+
+
+    // un ibngreso tiene variuos detalles
+
+    public function detalles ()
+    {
+        return $this->hasMany(DetalleIngreso::class);
+    }
+
+
 }
