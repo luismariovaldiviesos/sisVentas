@@ -161,6 +161,30 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        //  // permisos egresos
+
+        Permission::create([
+            'name' => 'crear_egreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_egreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_egreso',
+            'guard_name' => 'web',
+        ]);
+
+        Permission::create([
+            'name' => 'eliminar_egreso',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'detalle_egreso',
+            'guard_name' => 'web',
+        ]);
+
         // // permisos tratamiento
 
         // Permission::create([
