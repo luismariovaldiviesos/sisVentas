@@ -13,6 +13,9 @@
     <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js')}}"></script>
     <script src="{{ asset('plugins/nicescroll/nicescroll.js')}}"></script>
     <script src="{{ asset('plugins/currency/currency.js')}}"></script>
+    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/toast.js') }}"> </script>
+
 
     {{-- calendario web --}}
      {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js"></script>
@@ -37,6 +40,20 @@
         }
     </script>
     <script src="{{ asset('plugins/flatpickr/flatpickr.js')}}"></script>
+
+    @if ($productos > 1)
+
+    <script>
+        toastr.warning("configurar productos");
+
+       // para mensajes en el controller y a la vista
+        // window.livewire.on('getin-ok', msgOK=> {
+        //       toastr.success(msgOK, "info")
+        //   })
+        //   $this->emit('msg-ok','El ticket de pensión se cerró correctamente');
+    </script>
+
+    @endif
 
 @livewireScripts
 {{-- esto de abajo es para el fullcalendar (?) --}}
