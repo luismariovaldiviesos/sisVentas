@@ -21,7 +21,7 @@ class CreateIngresosTable extends Migration
             $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('tipoidentificador');  // factura nota de venta guia otro
-            $table->string('valoridentificador');
+            $table->string('valoridentificador')->unique();
             $table->decimal('totalingreso');
             $table->timestamps();
         });

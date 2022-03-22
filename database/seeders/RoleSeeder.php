@@ -153,10 +153,6 @@ class RoleSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name' => 'eliminar_ingreso',
-            'guard_name' => 'web',
-        ]);
-        Permission::create([
             'name' => 'detalle_ingreso',
             'guard_name' => 'web',
         ]);
@@ -176,10 +172,6 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        Permission::create([
-            'name' => 'eliminar_egreso',
-            'guard_name' => 'web',
-        ]);
         Permission::create([
             'name' => 'detalle_egreso',
             'guard_name' => 'web',

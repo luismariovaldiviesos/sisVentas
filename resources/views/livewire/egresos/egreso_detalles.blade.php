@@ -3,7 +3,7 @@
       <div class="modal-content">
         <div class="modal-header bg-dark">
           <h5 class="modal-title text-white">
-              <b>Detalle de Ingreso # {{$ingreso->id}}</b>
+              <b>Detalle de Egreso # {{$egreso->id}}</b>
           </h5>
           <h6 class="text-center text-warning" wire:loading>POR FAVOR ESPERE</h6>
         </div>

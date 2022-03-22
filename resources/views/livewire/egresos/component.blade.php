@@ -35,6 +35,7 @@
 								<th class="table-th text-white text-center">NUMERO EGRESO</th>
                                 <th class="table-th text-white text-center">FECHA EGRESO</th>
                                 <th class="table-th text-white text-center">TOTAL EGRESO</th>
+                                <th class="table-th text-white text-center">OBSERVACIONES</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
 						</thead>
@@ -51,11 +52,12 @@
 									<h6 class="text-center">{{$egreso->valoridentificador}}</h6>
 								</td>
                                 <td>
-									<h6 class="text-center">{{$egreso->created_at}}</h6>
+									<h6 class="text-center">{{\Carbon\Carbon::parse($egreso->created_at)->isoFormat('LL')}}</h6>
 								</td>
                                 <td>
-									<h6 class="text-center">{{$egreso->totalegreso}}</h6>
+									<h6 class="text-center">${{$egreso->totalegreso}}</h6>
 								</td>
+                                <td class='text-center'><textarea readonly class="form-control">{{ $egreso->observaciones }}</textarea></td>
 
 								<td class="text-center">
 
@@ -65,11 +67,7 @@
                                         <i class="fas fa-list"></i>
                                     </button>
                                    @endcan
-									@can('eliminar_egreso')
-									 <a href="javascript:void(0)" onclick="eliminarEgreso('{{$egreso->id}}')" class="btn btn-dark" title="Delete">
-										<i class="fas fa-trash"></i>
-									</a>
-									@endcan
+
 
 
 
@@ -94,6 +92,7 @@
 
 	</div>
 
+    @include('livewire.egresos.egreso_detalles')
 	@include('livewire.egresos.form')
 
 
@@ -118,6 +117,9 @@
             $('#theModal').modal('hide')
             noty(Msg)
         })
+        window.livewire.on('show-modal2', msg => {
+			$('#detallesModal').modal('show')
+		});
         window.livewire.on('impuesto-deleted', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
@@ -165,25 +167,7 @@
 		})
 	}
 
-	function eliminarIngreso(id) {
 
-        swal({
-            title: 'CONFIRMAR',
-            text: '¿CONFIRMAS ELIMINAR EL EGRESO?',
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonText: 'Cerrar',
-            cancelButtonColor: '#fff',
-            confirmButtonColor: '#3B3F5C',
-            confirmButtonText: 'Aceptar'
-        }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow',id)
-                swal.close()
-            }
-
-        })
-    }
 
 
 // CODIGO PARA SUMAR DETALLES

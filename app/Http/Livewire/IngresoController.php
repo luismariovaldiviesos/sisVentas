@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\DetalleEgreso;
 use App\Models\DetalleIngreso;
 use App\Models\Ingreso;
 use App\Models\Producto;
@@ -83,8 +84,7 @@ class IngresoController extends Component
 
     protected $listeners = [
 
-        'guardaIngreso' => 'guardaIngreso',
-        'deleteRow' => 'eliminarIngreso'
+        'guardaIngreso' => 'guardaIngreso'
     ];
 
     public function guardaIngreso($arregloproductos,$arreglocantidades,$arreglosprecioscompra,$totalingreso)
@@ -92,7 +92,7 @@ class IngresoController extends Component
         $rules  =[
 			'proveedor_id' => 'required',
 			'tipoidentificador' => 'required|not_in:Elegir',
-			'valoridentificador' => 'required'
+			'valoridentificador' => 'required|unique:ingresos'
 
 
 		];
@@ -101,7 +101,8 @@ class IngresoController extends Component
 			'proveedor_id.required' => 'Nombre del provvedor requerido',
             'tipoidentificador.required' => 'Tipo identificador requerido',
 			'tipoidentificador.not_in' => 'Elige un identificadora diferente de Elegir',
-            'valoridentificador.required' => 'valor identificador requerido'
+            'valoridentificador.required' => 'valor identificador requerido',
+            'valoridentificador.unique' => 'ya existe un registro con ese valor'
 
 		];
 
@@ -154,13 +155,14 @@ class IngresoController extends Component
     }
 
 
-   public function eliminarIngreso(Ingreso $ingreso){
-        dd('eliminar ingreso ', $ingreso);
-    }
+
 
     public function detalleIngreso(Ingreso $ingreso){
-        $this->detalles = $ingreso->detalles;
-        //dd($this->detalles);
+
+        $this->detalles = DetalleIngreso::join('productos as p','p.id','detalle_ingreso.producto_id')
+        ->select('detalle_ingreso.id','detalle_ingreso.cantidad','detalle_ingreso.preciocompra','p.nombre as productonombre')
+        ->where('detalle_ingreso.ingreso_id', $ingreso->id)
+        ->get();
         $this->emit('show-modal2','details loaded');
     }
 

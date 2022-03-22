@@ -28,6 +28,9 @@ class EgresosController extends Component
     $pageTitle,$componentName;
 	private $pagination = 5;
 
+     // poara detalles
+     public $detalles =[];
+
     public function resetUI()
 	{
 		$this->proveedor_id ='';
@@ -89,10 +92,8 @@ class EgresosController extends Component
         $rules  =[
 			'proveedor_id' => 'required',
 			'tipoidentificador' => 'required|not_in:Elegir',
-			'valoridentificador' => 'required',
+			'valoridentificador' => 'required|unique:egresos',
             'observaciones' => 'required'
-
-
 		];
 
 		$messages = [
@@ -100,6 +101,7 @@ class EgresosController extends Component
             'tipoidentificador.required' => 'Tipo identificador requerido',
 			'tipoidentificador.not_in' => 'Elige un identificadora diferente de Elegir',
             'valoridentificador.required' => 'valor identificador requerido',
+            'valoridentificador.unique' => 'ya existe un registro con ese valor',
             'observaciones.required' => 'ingrese observaciones del egreso'
 
 		];
@@ -153,12 +155,13 @@ class EgresosController extends Component
 		}
     }
 
-    public function eliminarEgreso(Egreso $egreso){
-        dd('eliminar Egreso ', $egreso);
-    }
 
     public function detalleEgreso(Egreso $egreso){
-        dd('ver detalle', $egreso);
+        $this->detalles = DetalleEgreso::join('productos as p','p.id','detalle_egreso.producto_id')
+        ->select('detalle_egreso.id','detalle_egreso.cantidad','detalle_egreso.preciocompra','p.nombre as productonombre')
+        ->where('detalle_egreso.egreso_id', $egreso->id)
+        ->get();
+        $this->emit('show-modal2','details loaded');
     }
 
 }
