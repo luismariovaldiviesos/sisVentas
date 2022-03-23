@@ -17,7 +17,7 @@
 
 				</ul>
 			</div>
-			@can('product_search')
+			@can('buscar_producto')
 			@include('common.searchbox')
 			@endcan
 			<div class="widget-content">

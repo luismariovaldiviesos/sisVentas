@@ -41,10 +41,10 @@
     </script>
     <script src="{{ asset('plugins/flatpickr/flatpickr.js')}}"></script>
 
-    @if ($productos > 1)
+    @if (count($productos) > 0 )
 
     <script>
-        toastr.warning("configurar productos");
+        toastr.error("existen productos con stok menor a 5 ");
 
        // para mensajes en el controller y a la vista
         // window.livewire.on('getin-ok', msgOK=> {

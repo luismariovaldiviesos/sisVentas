@@ -23,6 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.theme.app', function($view){
+            // $productos = \App\Models\Producto::count();
+            //
+
+            $productos =  \App\Models\Producto::where('stock','<',5)->get();
+            $view->with(['productos'=> $productos]);
+            //dd($productos);
+        });
     }
 }
