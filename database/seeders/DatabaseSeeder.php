@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ImpuestosSeeder::class);
         $this->call(ProductoSeeder::class);
         $this->call(ProveedoresSeeder::class);
+        $this->call(ClienteSeeder::class);
 
     }
 }

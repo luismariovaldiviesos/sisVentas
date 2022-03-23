@@ -177,28 +177,28 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        // // permisos tratamiento
+        // // permisos clientes
 
-        // Permission::create([
-        //     'name' => 'crear_tratamiento',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_tratamiento',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_tratamiento',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_tratamiento',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_tratamiento',
-        //     'guard_name' => 'web',
-        // ]);
+        Permission::create([
+            'name' => 'crear_cliente',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_cliente',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_cliente',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_cliente',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_cliente',
+            'guard_name' => 'web',
+        ]);
 
         // // permisos usuario
 

@@ -7,6 +7,7 @@ use App\Http\Livewire\RolesController;
 use App\Http\Livewire\UsersController;
 use App\Http\Livewire\PermisosController;
 use App\Http\Livewire\AsignarController;
+use App\Http\Livewire\ClientesController;
 use App\Http\Livewire\EgresosController;
 use App\Http\Livewire\EmpresaController;
 use App\Http\Livewire\ImpuestoController;
@@ -52,6 +53,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('proveedores', ProveedorController::class);
     Route::get('ingresos', IngresoController::class);
     Route::get('egresos', EgresosController::class);
+    Route::get('clientes', ClientesController::class);
 
 
 });
