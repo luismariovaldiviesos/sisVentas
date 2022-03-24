@@ -10,6 +10,7 @@ use App\Http\Livewire\AsignarController;
 use App\Http\Livewire\ClientesController;
 use App\Http\Livewire\EgresosController;
 use App\Http\Livewire\EmpresaController;
+use App\Http\Livewire\FacturasController;
 use App\Http\Livewire\ImpuestoController;
 use App\Http\Livewire\IngresoController;
 use App\Http\Livewire\ProductosController;
@@ -54,6 +55,10 @@ Route::middleware(['auth'])->group(function(){
     Route::get('ingresos', IngresoController::class);
     Route::get('egresos', EgresosController::class);
     Route::get('clientes', ClientesController::class);
+
+    Route::get('facturas', FacturasController::class);
+
+
 
 
 });
