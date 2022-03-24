@@ -70,10 +70,10 @@ class User extends Authenticatable
 
     }
 
-     // un  usuario (que crea) pued estar en muchas citas
-     public function citas()
+     // un  usuario (que crea) pued estar en muchas facturas
+     public function facturas()
      {
-         return $this->hasMany(Cita::class);
+         return $this->hasMany(Factura::class);
      }
 
 

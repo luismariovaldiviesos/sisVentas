@@ -10,4 +10,11 @@ class Cliente extends Model
     use HasFactory;
 
     protected $fillable = ['razonsocial','tipoidentificacion','valoridentificacion','direccion','email','telefono'];
+
+     // un  cliente pued estar en muchas facturas
+     public function facturas()
+     {
+         return $this->hasMany(Factura::class);
+     }
+
 }
