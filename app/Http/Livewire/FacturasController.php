@@ -8,6 +8,8 @@ use Livewire\Component;
 class FacturasController extends Component
 {
 
+    public $buscarCliente;
+
     public function render()
     {
         $empresa =  Empresa::all();

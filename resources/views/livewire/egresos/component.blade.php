@@ -25,7 +25,7 @@
 
 
 			<div class="widget-content">
-
+                @if (count($data) > 0 )
 				<div class="table-responsive">
 					<table class="table table-bordered table striped mt-1">
 						<thead class="text-white" style="background: #3B3F5C;">
@@ -81,6 +81,12 @@
 					</table>
 					{{$data->links()}}
 				</div>
+                @else
+
+                <h1>No se registran egresos</h1>
+
+                @endif
+
 
 			</div>
 

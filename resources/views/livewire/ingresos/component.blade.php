@@ -25,6 +25,8 @@
 
 
 			<div class="widget-content">
+                @if (count($data) > 0 )
+
 
 				<div class="table-responsive">
 					<table class="table table-bordered table striped mt-1">
@@ -73,6 +75,14 @@
 					</table>
 					{{$data->links()}}
 				</div>
+
+                @else
+
+                <h1>No se registran ingresos</h1>
+
+                @endif
+
+
 
 			</div>
 

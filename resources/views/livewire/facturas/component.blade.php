@@ -1,6 +1,6 @@
 <div class="row sales layout-top-spacing">
 
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <div class="widget widget-chart-one">
             <div class="widget-heading">
                 <h4 class="card-title">
@@ -56,34 +56,38 @@
 
 
     </div>
-
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <div class="widget widget-chart-one">
 
-            <div class="widget-heading">
-                <h4 class="card-title">
-                   Datos Cliente
-                </h4>
-            </div>
+             @include('livewire.facturas.cabecera')
+
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="widget widget-chart-one">
+
+             @include('livewire.facturas.buscaCliente')
 
         </div>
     </div>
 
 
-    <div>
+    <div class="col-sm-6">
+        <div class="widget widget-chart-one">
 
-        @can('editar_empresa')
-        <button type="button" wire:click.prevent="Guardar()" class="btn btn-dark close-modal">
-            Guardar
-            </button>
-        @endcan
+             @include('livewire.facturas.resumenventa')
 
+        </div>
+    </div>
 
+<br><br><br>
+    <div class="col-sm-12 col-md-12 mt-4">
+        <!-- DETALLES -->
+        @include('livewire.facturas.detalles')
     </div>
 
 
-
-   {{-- @include('livewire.permisos.form') --}}
 
 
 </div>
