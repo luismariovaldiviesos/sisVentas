@@ -47,14 +47,7 @@
 
         </div>
         <br>
-
         @endcan
-
-
-
-
-
-
     </div>
     <div class="col-sm-6">
         <div class="widget widget-chart-one">

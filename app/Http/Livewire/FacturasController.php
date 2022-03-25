@@ -22,12 +22,13 @@ class FacturasController extends Component
         //buscar clientes
         if(strlen($this->buscarCliente) > 0)
         {
-            $clientes = Cliente::where('valoridentificacion','like', '%' . $this->buscarCliente . '%')->get();
+            $clientes = Cliente::where('valoridentificacion','like', '%' . $this->buscarCliente . '%')
+                                ->orWhere('razonsocial','like', '%' . $this->buscarCliente . '%')->get();
 
         }
         else{
-            $clientes = Cliente::where('valoridentificacion','like', '%' . $this->buscarCliente . '%')->get();
-
+            $clientes = Cliente::where('valoridentificacion','like', '%' . $this->buscarCliente . '%')
+                                ->orWhere('razonsocial','like', '%' . $this->buscarCliente . '%')->get();
         }
 
         $this->clientes = $clientes;

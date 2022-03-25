@@ -26,7 +26,7 @@
         @if ($buscarCliente != '')
             @foreach($clientes as $r)
             <li wire:click="mostrarCliente('{{$r}}')" class="list-group-item list-group-item-action">
-                <b>{{$r->nombre}}</b> - <h7 class="text-info">ruc/ci</h7>:{{$r->valoridentificacion }}
+                <b>{{$r->razonsocial}}</b> - <h7 class="text-info">ruc/ci</h7>:{{$r->valoridentificacion }}
             </li>
             @endforeach
             @endif
