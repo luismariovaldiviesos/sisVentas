@@ -18,26 +18,17 @@ class FacturasController extends Component
     // para cabecera factura
     //codDoc claveAcceso  secuencial
     // fechaEmision  - > created_at
-    public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie;
-    public $codigoNumerico  = 00000001, $tipoEmision ;
+    public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie, $tipoEmision ;
 
 
 
     public function  mount()
     {
-
         $fact  = new Factura();
-        $this->fechafactura =  $fact->fechaFactura();
-        $this->codDoc  = $fact->codigoDoc();
-        //ruc
+        $this->fechafactura =  Carbon::now()->format('d-m-Y');
+        $this->claveAcceso = $fact->claveAcceso();
         $this->secuencial = $fact->secuencial();
-
-        $this->serie  =  $fact->serie();
-        $this->tipoEmision  =  $fact->tipoEmision();
-
-       $this->claveAcceso = $this->fechafactura.$this->codDoc.
-
-       dd($this->tipoEmision);
+       //dd($this->claveAcceso);
 
     }
 

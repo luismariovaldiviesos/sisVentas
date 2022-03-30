@@ -42,17 +42,11 @@ class Factura extends Model
      }
 
 
-    public function claveAccesoUno()
+    public function claveAcceso()
     {
-        $fechafactura =  Carbon::now()->format('dmY');
+        $fecha =  Carbon::now()->format('dmY');
         $codigo  = "01";
-        $parteUno = $fechafactura.$codigo;
-        return $parteUno;
-
-    }
-
-    public function claveAccesoDos()
-    {
+        $parteUno = $fecha.$codigo;
         $empresa =  $this->empresa();
         $ruc =  $empresa[0]->ruc;
         $ambiente  =  $empresa[0]->ambiente;
@@ -61,8 +55,15 @@ class Factura extends Model
         $serie  = $establecimiento.$puntoEmi;
         $tipoEmi  = "1";
         $parteDos =  $ruc.$ambiente.$serie.$tipoEmi;
-         return $parteDos;
+        $cadenaUNo = $parteUno.$parteDos;
+        $codigoNumerico  = "00000001";
+        $cadenaDos  = $cadenaUNo.$this->secuencial().$codigoNumerico;
+        $dig  =  $this->getMod11Dv($cadenaDos);
+        $claveFinal = $cadenaDos.$dig;
+        return $claveFinal ;
     }
+
+
 
 
     public  function secuencial ()
@@ -77,18 +78,11 @@ class Factura extends Model
            $tamano = 9;  // max de ceros a la izquierda
            $fac = substr(str_repeat(0,$tamano).$fac,-$tamano); // se lelna de ceros a la izq
         }
-        $codigoNumerico  = "00000001";  // codigo numerico es el mismo para toda fac tiene que ser 8 dig
-        return $fac.$codigoNumerico;
+       // codigo numerico es el mismo para toda fac tiene que ser 8 dig
+        return $fac;
     }
 
 
-    public function claveAcceso()
-    {
-        $num   = $this->claveAccesoUno().$this->claveAccesoDos().$this->secuencial();
-        $dig  =  $this->getMod11Dv($num);
-        $claveFinal = $num.$dig;
-        return $claveFinal;
-    }
 
 
     public function getMod11Dv($num)
