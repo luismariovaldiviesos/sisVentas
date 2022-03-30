@@ -19,7 +19,7 @@ class CreateFacturasTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('codDoc',2); // ma´ximo dos en tamaño
             $table->string('claveAcceso',49); // maximo 49 en tamaño
-            $table->string('secuencial',2); // ma´ximo dos en tamaño
+            $table->string('secuencial',9); // ma´ximo 9 en tamaño
             // $table->dateTime('fechaEmision');  created_at
             $table->enum('estado',['PAGADA','PENDIENTE','ELIMINADA'])->default('PAGADA');
             $table->foreign('cliente_id')->references('id')->on('clientes');

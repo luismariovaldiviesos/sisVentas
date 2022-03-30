@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Cliente;
 use App\Models\Empresa;
+use App\Models\Factura;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class FacturasController extends Component
@@ -13,9 +15,43 @@ class FacturasController extends Component
     public $buscarCliente, $razonsocial, $tipoidentificacion, $valoridentificacion, $email,
              $telefono, $clientes, $clienteSelected;
 
+    // para cabecera factura
+    //codDoc claveAcceso  secuencial
+    // fechaEmision  - > created_at
+    public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie;
+    public $codigoNumerico  = 00000001, $tipoEmision ;
+
+
+
+    public function  mount()
+    {
+
+        $fact  = new Factura();
+        $this->fechafactura =  $fact->fechaFactura();
+        $this->codDoc  = $fact->codigoDoc();
+        //ruc
+        $this->secuencial = $fact->secuencial();
+
+        $this->serie  =  $fact->serie();
+        $this->tipoEmision  =  $fact->tipoEmision();
+
+       $this->claveAcceso = $this->fechafactura.$this->codDoc.
+
+       dd($this->tipoEmision);
+
+    }
+
+
+
+
+
+
+
+
 
     public function render()
     {
+
         $clientes = null;
         $empresa =  Empresa::all();
 
