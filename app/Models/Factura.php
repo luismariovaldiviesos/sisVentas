@@ -34,6 +34,37 @@ class Factura extends Model
     }
 
 
+     // empresa para sacar datos y formar la clave de acceo
+     public function empresa()
+     {
+             $empresa =  Empresa::get();
+             return $empresa;
+     }
+
+
+    public function claveAccesoUno()
+    {
+        $fechafactura =  Carbon::now()->format('dmY');
+        $codigo  = "01";
+        $parteUno = $fechafactura.$codigo;
+        return $parteUno;
+
+    }
+
+    public function claveAccesoDos()
+    {
+        $empresa =  $this->empresa();
+        $ruc =  $empresa[0]->ruc;
+        $ambiente  =  $empresa[0]->ambiente;
+        $establecimiento =  $empresa[0]->estab;
+        $puntoEmi  =  $empresa[0]->ptoEmi;
+        $serie  = $establecimiento.$puntoEmi;
+        $tipoEmi  = "1";
+        $parteDos =  $ruc.$ambiente.$serie.$tipoEmi;
+         return $parteDos;
+    }
+
+
     public  function secuencial ()
     {
         $fac = Factura::latest('secuencial')->first(); // ultimo ingresao  registro por el campo secuencial
@@ -46,63 +77,58 @@ class Factura extends Model
            $tamano = 9;  // max de ceros a la izquierda
            $fac = substr(str_repeat(0,$tamano).$fac,-$tamano); // se lelna de ceros a la izq
         }
-        return $fac;
+        $codigoNumerico  = "00000001";  // codigo numerico es el mismo para toda fac tiene que ser 8 dig
+        return $fac.$codigoNumerico;
     }
 
-    public function  fechaFactura ()
+
+    public function claveAcceso()
     {
-        $fechafactura =  Carbon::now()->format('d-m-Y');
-        return $fechafactura;
+        $num   = $this->claveAccesoUno().$this->claveAccesoDos().$this->secuencial();
+        $dig  =  $this->getMod11Dv($num);
+        $claveFinal = $num.$dig;
+        return $claveFinal;
     }
 
-    public function codigoDoc()
+
+    public function getMod11Dv($num)
     {
-        $codigo  = "01";
-        return $codigo;
+
+        $digits = str_replace( array( '.', ',' ), array( ''.'' ), strrev($num ) );
+        if ( ! ctype_digit( $digits ) )
+        {
+          return false;
+        }
+
+        $sum = 0;
+	    $factor = 2;
+        for( $i=0;$i<strlen( $digits ); $i++ )
+        {
+          $sum += substr( $digits,$i,1 ) * $factor;
+          if ( $factor == 7 )
+          {
+            $factor = 2;
+          }else{
+           $factor++;
+         }
+        }
+        $dv = 11 - ($sum % 11);
+        if ( $dv == 10 )
+	  {
+	    return 1;
+	  }
+	  if ( $dv == 11 )
+	  {
+	    return 0;
+	  }
+	  return $dv;
     }
 
-    // empresa
-   public function empresa()
-   {
-        $empresa =  Empresa::get();
-        return $empresa;
-   }
-
-
-
-   public function serie()
-   {
-       $empresa =  $this->empresa();
-       $establecimiento =  $empresa[0]->estab;
-       $puntoEmi  =  $empresa[0]->ptoEmi;
-        $serie  = $establecimiento.$puntoEmi;
-        return $serie;
-   }
-
-   public  function tipoEmision()
-   {
-    $empresa =  $this->empresa();
-    $tipoEmision =  $empresa[0]->tipoEmision;
-    return $tipoEmision;
-   }
 
 
 
 
 
-
-
-
-
-    /*  max 49
-    ddmmaaaa  ok
-    tipocomprobante  01
-        ruc
-        ambiente	serie	secuencial
-        codigo nuemerici
-        tipo emision
-        digito verificador
-    */
 
 
 }
