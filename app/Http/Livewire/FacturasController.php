@@ -20,6 +20,9 @@ class FacturasController extends Component
     // fechaEmision  - > created_at
     public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie, $tipoEmision ;
 
+    // para el carrito
+    public $cart = [];
+
 
 
     public function  mount()
