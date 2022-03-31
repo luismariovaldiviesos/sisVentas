@@ -2,7 +2,7 @@
 
         <div class="widget widget-chart-one">
 
-            <div class="widget-content">
+            <div class="widget-content col-sm-12 col-md-12 ">
 
                 <div class="row">
                     <div class="col-sm-12 col-md-12">

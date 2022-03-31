@@ -52,7 +52,7 @@
     <div class="col-sm-6">
         <div class="widget widget-chart-one">
 
-             @include('livewire.facturas.cabecera')
+             @include('livewire.facturas.partials.cabecera')
 
         </div>
     </div>
@@ -60,7 +60,7 @@
     <div class="col-sm-6">
         <div class="widget widget-chart-one">
 
-             @include('livewire.facturas.buscaCliente')
+             @include('livewire.facturas.partials.buscaCliente')
 
         </div>
     </div>
@@ -69,7 +69,7 @@
     <div class="col-sm-6">
         <div class="widget widget-chart-one">
 
-             @include('livewire.facturas.resumenventa')
+             @include('livewire.facturas.partials.resumenventa')
 
         </div>
     </div>
@@ -77,7 +77,7 @@
 <br><br><br>
     <div class="col-sm-12 col-md-12 mt-4">
         <!-- DETALLES -->
-        @include('livewire.facturas.detalles')
+        @include('livewire.facturas.partials.detalles')
     </div>
 
 
@@ -86,7 +86,9 @@
 </div>
 
 
-<script>
+{{-- *****  ALERTAS  ********** --}}
+
+{{-- <script>
 
     document.addEventListener('DOMContentLoaded', function(){
 
@@ -133,5 +135,15 @@
              }
          })
      }
+
+</script> --}}
+
+
+{{-- ***** FIN  ALERTAS  ********** --}}
+
+
+<script>
+
+
 
 </script>
