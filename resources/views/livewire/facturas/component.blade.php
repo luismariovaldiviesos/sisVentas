@@ -70,6 +70,7 @@
         <div class="widget widget-chart-one">
 
              @include('livewire.facturas.partials.resumenventa')
+             @include('livewire.facturas.partials.monedas')
 
         </div>
     </div>

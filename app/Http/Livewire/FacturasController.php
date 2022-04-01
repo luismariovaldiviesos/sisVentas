@@ -21,7 +21,8 @@ class FacturasController extends Component
     public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie, $tipoEmision ;
 
     // para el carrito
-    public $cart = [];
+    public $total =10, $itemsQuantity =1, $cart = [], $valorIngresado;
+
 
 
 
