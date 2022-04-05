@@ -7,6 +7,7 @@ use App\Models\Empresa;
 use App\Models\Factura;
 use Carbon\Carbon;
 use Livewire\Component;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class FacturasController extends Component
 {
@@ -21,7 +22,7 @@ class FacturasController extends Component
     public $fechafactura, $secuencial, $claveAcceso, $codDoc, $serie, $tipoEmision ;
 
     // para el carrito
-    public $total =10, $itemsQuantity =1, $cart = [], $efectivo, $change;
+    public $total, $itemsQuantity, $efectivo, $change;
 
 
 
@@ -35,14 +36,6 @@ class FacturasController extends Component
        //dd($this->claveAcceso);
 
     }
-
-
-
-
-
-
-
-
 
     public function render()
     {
@@ -68,7 +61,12 @@ class FacturasController extends Component
 
 
 
-        return view('livewire.facturas.component', compact('empresa'))->extends('layouts.theme.app')
+        return view('livewire.facturas.component', [
+
+            'empresa' =>  $empresa,
+            'cart' => Cart::getContent()->sortBy('name'),
+
+        ])->extends('layouts.theme.app')
 		->section('content');
 
     }
