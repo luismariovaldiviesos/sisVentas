@@ -1,0 +1,269 @@
+[33mcommit 27fb1fcda55de2109ad6dc5a8632644817e3562f[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Tue Apr 5 16:45:41 2022 -0500
+
+    migraciond etalles factura
+
+[33mcommit c5894270bedad1c364396231af2aecde4a1a6a14[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Tue Apr 5 12:17:42 2022 -0500
+
+    instalacion de cxarrito  de compras
+
+[33mcommit b5f822cae77324c1059dd3ce48d7834151d0867d[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Apr 4 16:29:54 2022 -0500
+
+    monedas ok parece
+
+[33mcommit c70b39362a8367d361972ab51fe70795d2a6d60f[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Apr 4 16:20:18 2022 -0500
+
+    retomamos monedas
+
+[33mcommit 42560e632c990ce51f2c2560d5eef35a32f837c1[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Apr 1 16:31:57 2022 -0500
+
+    efectivo botones
+
+[33mcommit 26cc1b236bc2b2c55828d319c7c53fd7e28643ff[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 31 16:36:49 2022 -0500
+
+    armando detalle de la factura
+
+[33mcommit f7b6d3696f34254700726f2f9b15e788e23f06b7[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 31 15:40:38 2022 -0500
+
+    cambio de facturas partial vistas; desde aqui iniciamos carrito
+
+[33mcommit a28fc10b9a8e3a69d3c3f183d31656cc2047e9e1[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 30 15:42:43 2022 -0500
+
+    clave de acceso ok, desde aqui iniciamos carrito de compras
+
+[33mcommit df7581438253e0f0219f28f7666e8e44fa0b4cde[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 30 15:05:32 2022 -0500
+
+    clave acceso ok
+
+[33mcommit 78f3b3f4d54b0d68d99a7e6b235af9b2d5e4882f[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 30 14:37:52 2022 -0500
+
+    clave de acceso ok
+
+[33mcommit 57549c03c56316a614a2261193c8325a70a62ccd[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 30 12:21:49 2022 -0500
+
+    formando clave de acceso
+
+[33mcommit 1f8da628b2ccf21c26044c84a3ba1eaea47544a1[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 25 16:28:30 2022 -0500
+
+    busca y carga cliente por nombre y ruc
+
+[33mcommit 07b6d3656be2b9077adff80c6471477b19c8ee10[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 25 16:01:12 2022 -0500
+
+    busca y carga datos clientes
+
+[33mcommit f52946c4f282d9c64c09bc180abfa90dbf324bcd[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 25 08:30:41 2022 -0500
+
+    vista factura ok, arreglo de error ingresos egresos cuando no hay I-E
+
+[33mcommit 6ff09c13db2d1feeb634920577fc6e96d08a262c[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 24 14:53:22 2022 -0500
+
+    empezamos desde aqui  el buscador de clientes
+
+[33mcommit ca8c96481eb32551cbd1a39aa4ccf1bc1baa1718[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 24 14:10:53 2022 -0500
+
+    sidebar y controller y component de factura
+
+[33mcommit 400685f2e03d68d5aeb7daf7c5ba93f3266888f3[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 24 12:36:33 2022 -0500
+
+    modelo migracion y relaciones factura
+
+[33mcommit 48cf27d47320de5fbb65345acc780f57172c5a0f[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 23 16:50:35 2022 -0500
+
+    clientes ok crud, seeder, validaciones
+
+[33mcommit 10a1880477c7c5a43e785cb34f1d20fac51272b4[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 23 09:29:23 2022 -0500
+
+    variables globales ok mensajes toastr ok
+
+[33mcommit 904da45d269e6c17213e6eda84debec374b1a433[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Tue Mar 22 16:31:11 2022 -0500
+
+    varaibles globales y mensajes toastr
+
+[33mcommit 21a8731883602e3f33544773d9103b4bdc9a88d4[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Tue Mar 22 12:02:39 2022 -0500
+
+    ingresos y egresos ok, ver detalles
+
+[33mcommit 2caee84edd41fc9de32ae889ed71bb29ff522ace[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Mar 21 15:43:56 2022 -0500
+
+    saca detalles de ingreso, fata sacar nombres etc en el detalle
+
+[33mcommit 4ff58bef08e3c43ba9c2b38f3e9bdd096732471c[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Mar 21 13:59:10 2022 -0500
+
+    egresos ok  (graba, permisos, resta stock)
+
+[33mcommit 7511d9149a1e4448d0b63740a2c9069a2011a1e9[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 16:43:35 2022 -0500
+
+    desde aqui  no se va a editar ingresos, se va a generar egresos
+
+[33mcommit 20a628ede6feb9afb38cf8ed3dc5abe6dc413612[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 16:37:45 2022 -0500
+
+    no se va a editar ingresos, se va a generar egresos
+
+[33mcommit 3f8c56d48f75c8e663b87cf74ccf5d5066505498[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 15:19:47 2022 -0500
+
+    vamos a iniciar con los mmetodos editar, eliminar y detalles ingreso
+
+[33mcommit b01d367cf96e5732ef946d26578ab9f4c3fbaf59[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 14:43:49 2022 -0500
+
+    validaciones varias ingreso, detalle ingreso y stocks ok
+
+[33mcommit bbdbb22d4fae6e8c4c0ef911242fd100bbc8f9dd[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 12:50:33 2022 -0500
+
+    guarda ingreso, detalle ingreso y actualiza stock ok
+
+[33mcommit 7e9ba63cf42f3682032abe0a9f9b195b9bed007b[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 18 09:18:21 2022 -0500
+
+    listo para guardar ingreso, se soluciona nullidad de algunos campos y se pone el modal en el include del component
+
+[33mcommit 5c8f0367fc2125086010c92d5c06ae0da626f82e[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 17 20:28:01 2022 -0500
+
+    listos para guardar ingreso ++
+
+[33mcommit da2b1a5e9cb794a057e8eabd5a87a117c366edb6[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 17 20:20:56 2022 -0500
+
+    listos para grabar ingreso
+
+[33mcommit e18ef547b6a119ed62a4a0aa97ac2e6da84ef22b[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 17 10:52:02 2022 -0500
+
+    hasta aqui vamos a empezar a modificar la base de datos
+
+[33mcommit 15e54d9094bb7a3eec16bf73fae09bd7d91c513b[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 16 14:02:05 2022 -0500
+
+    funciona hasta enviar al back tda la data
+
+[33mcommit 9a1d2626a36bfd46e92249bd6f5759b7bae97e50[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Mar 14 15:23:00 2022 -0500
+
+    hasta aqui funciona el detalle, vamos a solucioanr el boton guardar
+
+[33mcommit 1dc85e63cb6a2bee6c8199d22032091af70e763d[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 11 09:26:45 2022 -0500
+
+    vamos a iniciar el front de detalle ingreso, hasta aqui esta generado cabecera ingreso
+
+[33mcommit a004e36f893b131a1df8d609886154602a069b38[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Thu Mar 10 11:10:03 2022 -0500
+
+    desde aqui se inicia para hacer ingresos de producnto
+
+[33mcommit 3fe876576e67e19d19b210a994422536e4e4a71e[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 9 16:31:21 2022 -0500
+
+    asignar proveedor a producto
+
+[33mcommit 3c6904db657ee0f761a4b1250af5916cfbb6c6f3[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 9 15:19:04 2022 -0500
+
+    CRUD seeder y sidebar proveedores OK
+
+[33mcommit 0b3e307219390ba43b0d4acfe3420f93ab3fb8a8[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Mon Mar 7 16:34:00 2022 -0500
+
+    crud productos - impuestos y tabla producto_impuesto
+
+[33mcommit 1eefcd8616c72cb3105ba2ca4739410ce968c336[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Sat Mar 5 13:43:05 2022 -0500
+
+    sincronizacion de repos
+
+[33mcommit 75d7feb7e1693b6201cd3af1f5374f5a936f4b75[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Sat Mar 5 13:11:57 2022 -0500
+
+    productos inicio
+
+[33mcommit 6bad2adcf18881a873f03acb1bd92dcb12e372f7[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Fri Mar 4 16:02:14 2022 -0500
+
+    impuesto crud, seeder, permisos, y validacion de permisos en el front
+
+[33mcommit 68290bdbf65af829656196d333d0bd11a3a77258[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 2 16:01:37 2022 -0500
+
+    usuarios roles permisos empresa ok basico
+
+[33mcommit 65324913c7c740701f43a234875ad12261ed0cc6[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 2 10:56:32 2022 -0500
+
+    roles persmisos empresa ok
+
+[33mcommit c772be126bdc0b28de59e05fdca629a9023e44ce[m
+Author: luismariovaldiviesos <luismario.valdiviesos@gmail.com>
+Date:   Wed Mar 2 10:50:18 2022 -0500
+
+    first commit

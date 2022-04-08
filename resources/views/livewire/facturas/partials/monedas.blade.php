@@ -2,6 +2,7 @@
     <div class="col-sm-6">
         <div class="input-group input-group-md mb-3">
             <div class="input-group-prepend">
+
                 <span class="input-group-text input-gp hideonsm" style="background: #3B3F5C; color:white">Efectivo F8
                 </span>
             </div>
