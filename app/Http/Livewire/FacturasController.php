@@ -3,19 +3,22 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cliente;
+use App\Models\DetalleFactura;
 use App\Models\Empresa;
 use App\Models\Factura;
 use App\Models\Producto;
 use Carbon\Carbon;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class FacturasController extends Component
 {
 
     // para buscar cliente
     public $buscarCliente, $razonsocial, $tipoidentificacion, $valoridentificacion, $email,
-             $telefono, $clientes, $clienteSelected;
+             $telefono, $clientes, $clienteSelected, $cliente_id;
 
     // para cabecera factura
     //codDoc claveAcceso  secuencial
@@ -86,10 +89,12 @@ class FacturasController extends Component
     // metodo cuando se escanea el codigo
     public function ScanCode($barcode , $cant =1){
 
+
         $producto = Producto::where('barcode', $barcode)->first();
+        //dd($producto);
         if($producto == null || empty($empty))
         {
-            $this->emit('scan-notfound', 'El producto no está  registrado')
+            $this->emit('scan-notfound', 'El producto no está  registrado');
         }
         else
         {
@@ -151,8 +156,8 @@ class FacturasController extends Component
     public function updateQty($producto, $cant = 1)
     {
         $title = '';
-        $producto = Producto::find($productoId);
-        $exist=  Cart::get($productoId);
+        $producto = Producto::find($producto);
+        $exist=  Cart::get($producto);
         if($exist)
             $title = 'Cantidad actualizada';
          else
@@ -166,7 +171,7 @@ class FacturasController extends Component
             }
         }
 
-        $this->removeItem($productoId);
+        $this->removeItem($producto);
         if($cant > 0)
         {
             Cart::add($producto->id, $producto->nombre, $producto->precio, $cant);
@@ -221,6 +226,7 @@ class FacturasController extends Component
         $this->clientes = '';
         $this->buscarCliente = '';
         $clienteJson = json_decode($cliente);
+        $this->cliente_id = $clienteJson->id;
         $this->razonsocial =  $clienteJson->razonsocial;
         $this->tipoidentificacion =  $clienteJson->tipoidentificacion;
         $this->valoridentificacion =  $clienteJson->valoridentificacion;
@@ -236,4 +242,86 @@ class FacturasController extends Component
         $this->email = "";
         $this->telefono =  "";
     }
+
+
+
+    public function saveSale()
+    {
+        if($this->total <=0)
+		{
+			$this->emit('sale-error','AGEGA PRODUCTOS A LA VENTA');
+			return;
+		}
+		if($this->efectivo <=0)
+		{
+			$this->emit('sale-error','INGRESA EL EFECTIVO');
+			return;
+		}
+		if($this->total > $this->efectivo)
+		{
+			$this->emit('sale-error','EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
+			return;
+		}
+        if($this->cliente_id == null){
+
+            $this->emit('sale-error','iNGRESA DATOS DEL CLIENTE');
+			return;
+        }
+
+        DB::beginTransaction();
+
+        try {
+            $factura  =  Factura::create([
+                'cliente_id' => $this->cliente_id,
+                'user_id' => Auth()->user()->id,
+                'codDoc' => '01',
+                'claveAcceso' =>   $this->claveAcceso,
+                'secuencial' =>   $this->secuencial,
+                'estado' => 'PAGADA'
+
+            ]);
+
+            //dd($factura);
+            if($factura){
+                $items = Cart::getContent();
+                foreach ($items as  $item) {
+					DetalleFactura::create([
+						'factura_id' => $factura->id,
+						'producto_id' => $item->id,
+						'cantidad' => $item->cantidad,
+						'precioUnitario' => $item->precioUnitario,
+					]);
+
+					//update stock
+					$producto = Producto::find($item->id);
+					$producto->stock = $producto->stock - $item->cantidad;
+					$producto->save();
+				}
+
+            }
+
+            DB::commit();
+            Cart::clear();
+            $this->efectivo =0;
+            $this->change =0;
+            $this->total = Cart::getTotal();
+            $this->itemsQuantity = Cart::getTotalQuantity();
+            $this->emit('sale-ok','Venta registrada con éxito');
+            $this->emit('print-ticket', $factura->id);
+
+        } catch (Exception $e) {
+			DB::rollback();
+			$this->emit('sale-error', $e->getMessage());
+		}
+
+    }
+
+
+    public function printTicket($factura)
+	{
+		 return redirect("print:://$factura->id");
+
+	}
+
+
 }

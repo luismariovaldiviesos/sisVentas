@@ -86,65 +86,37 @@
 
 </div>
 
-
-{{-- *****  ALERTAS  ********** --}}
-
-{{-- <script>
-
-    document.addEventListener('DOMContentLoaded', function(){
-
-
-
-        window.livewire.on('empresa-added', Msg=> {
-            noty(Msg)
-        })
-
-        window.livewire.on('permiso-exists', Msg=> {
-            noty(Msg)
-        })
-        window.livewire.on('permiso-error', Msg=> {
-            noty(Msg)
-        })
-        window.livewire.on('hide-modal', Msg=> {
-            $('#theModal').modal('hide')
-        })
-        window.livewire.on('show-modal', Msg=> {
-            $('#theModal').modal('show')
-        })
-
-
-
-
-    });
-
-    function Confirm(id)
-     {
-         swal({
-             title: 'CONFIRMAR',
-             text: '¿ DESEA ELIMINAR EL REGISTRO ?',
-             type: 'warning',
-             showCancelButton: true,
-             cancelButtonText: 'Cerrar',
-             cancelButtonColor: '#fff',
-             confirmButtonColor: '#3B3F5C',
-             confirmButtonText: 'Aceptar'
-         }).then(function(result){
-             if(result.value)
-             {
-                 window.livewire.emit('destroy', id) //deleteRow va al listener del controller
-                 swal.close()
-             }
-         })
-     }
-
-</script> --}}
-
-
-{{-- ***** FIN  ALERTAS  ********** --}}
+<script src="{{ asset('js/keypress.js') }}"></script>
+<script src="{{ asset('js/onscan.js') }}"></script>
 
 
 <script>
 
+try{
+
+    onScan.attachTo(document, {
+    suffixKeyCodes: [13],
+    onScan: function(barcode) {
+        console.log(barcode)
+        window.livewire.emit('scan-code', barcode)
+    },
+    onScanError: function(e){
+        //console.log(e)
+    }
+
+    })
+
+    console.log('Scanner  listo ctm !')
+
+
+    } catch(e){
+    console.log('Error de lectura: ', e)
+    }
+
 
 
 </script>
+
+@include('livewire.facturas.scripts.shortcuts')
+@include('livewire.facturas.scripts.events')
+@include('livewire.facturas.scripts.general')
