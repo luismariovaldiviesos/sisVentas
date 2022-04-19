@@ -6,7 +6,7 @@
                 <table class="table table-bordered table-striped mt-1">
                     <thead class="text-white" style="background: #3B3F5C">
                         <tr>
-                            <th width="10%"></th>
+
                             <th class="table-th text-left text-white">Código Pr.</th>
                             <th class="table-th text-center text-white">Descripción</th>
                             <th width="13%" class="table-th text-center text-white">Cant.</th>
@@ -22,7 +22,7 @@
                         @foreach ($cart as $item )
                         <tr>
                             <td><h6>{{$item->id}}</h6></td>
-                            <td><h6>{{$item->descripcion}}</h6></td>
+                            <td><h6>{{$item->name}}</h6></td>
                             <td>
                             {{-- CANTIDAD  --}}
                                 <input type="number" id="r{{$item->id}}"
@@ -34,11 +34,22 @@
                             </td>
 
                            <td class="text-center">${{number_format($item->price,2)}}</td>
-                           <td class="text-center">${{number_format($item->descuento,2)}}</td>
-                           {{-- SUBTOTAL --}}
+                             {{-- SUBTOTAL --}}
+                             @php
+                             $subtotalitem  =  $item->price * $item->quantity ;
+                             $subdescuento  = $subtotalitem *  $porcentajeDescto /100 ;
+                             @endphp
+                           <td class="text-center">
+                                <input type="number" id="porcentajeDescto"
+                                wire:model="porcentajeDescto"
+                                class="form-control text-center" value="{{$porcentajeDescto}}"
+                                >
+                           </td>
+                                {{-- TOTAL --}}
+
                                 <td class="text-center">
                                     <h6>
-                                        ${{number_format($item->price * $item->quantity - $item->descuento,2)}}
+                                        ${{number_format($item->price * $item->quantity,2)}}
                                     </h6>
                                 </td>
 
@@ -59,30 +70,88 @@
                           </tr>
                         @endforeach
 
-                        <tr>
-                            <td colspan="6" rowspan="5"></td>
-                            <td>SUBTOTAL</td>
-                            <td><input type="text" name="subtotal"></td>
-                          </tr>
-                          <tr>
-                            <td>IVA 0%</td>
-                            <td><input type="text" name="iva0"></td>
-                          </tr>
-                          <tr>
-                            <td>IVA 12</td>
-                            <td><input type="text" name="iva12"></td>
-                          </tr>
-                          <tr>
-                            <td>DESCUENTO</td>
-                            <td><input type="text" name="descuento"></td>
-                          </tr>
-                          <tr>
-                            <td>VALOR TOTAL</td>
-                            <td><input type="text" name="total"></td>
-                          </tr>
 
                     </tbody>
+
+
                 </table>
+
+                <tfoot>
+
+                    <div class="row mt-4 connect-sorting">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+                            <h7 class="text-info">SUBTOTAL</h7>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="la la-phone la-lg"></i></div>
+                                </div>
+                                <input type="text" value="{{ $total }}" wire:model.lazy="total" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+                            <h7 class="text-info">IVA 0%</h7>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="la la-phone la-lg"></i></div>
+                                </div>
+                                <input type="text" wire:model.lazy="tipoidentificacion" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+                            <h7 class="text-info">IVA 12%</h7>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="la la-phone la-lg"></i></div>
+                                </div>
+                                <input type="text" wire:model.lazy="tipoidentificacion" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+                            <h7 class="text-info">DESCUENTO</h7>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="la la-phone la-lg"></i></div>
+                                </div>
+                                <input type="text" wire:model.lazy="tipoidentificacion" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+                            <h7 class="text-info">VALOR TOTAL</h7>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="la la-phone la-lg"></i></div>
+                                </div>
+                                <input type="text" wire:model.lazy="tipoidentificacion" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <tr>
+                        <td colspan="6" rowspan="5"></td>
+                        <td>SUBTOTAL</td>
+                        <td><input type="text" name="subtotal" value="{{ $total }}"></td>
+                    </tr>
+                  <tr>
+                    <td>IVA 0%</td>
+                    <td><input type="text" name="iva0"></td>
+                  </tr>
+                  <tr>
+                    <td>IVA 12</td>
+                    <td><input type="text" name="iva12"></td>
+                  </tr>
+                  <tr>
+                    <td>DESCUENTO</td>
+                    <td><input type="text" name="descuento"></td>
+                  </tr>
+                  <tr>
+                    <td>VALOR TOTAL</td>
+                    <td><input type="text" name="total"></td>
+                  </tr> --}}
+
+
+
+
+            </tfoot>
 
             </div>
 		@else

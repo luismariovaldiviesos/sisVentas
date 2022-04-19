@@ -42,5 +42,7 @@ dentro de la carpeta controladores:
     que los impuestos y proveedores en productos se visualicen en el check cuando se va a editar
     -----------------------------------------------------------------------------------------------
 
+    revisar costo del producto: se ingresa costo en producto y en ingreso y en egreso
+
     carrto en el video 46
 
