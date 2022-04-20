@@ -200,28 +200,36 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        // // permisos usuario
+         //permisos factura
 
-        // Permission::create([
-        //     'name' => 'crear_usuario',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_usuario',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_usuario',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_usuario',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_usuario',
-        //     'guard_name' => 'web',
-        // ]);
+         Permission::create([
+
+            'name' => 'facturar',
+            'guard_name' => 'web'
+         ]);
+
+         // permisos unidades de medida
+
+        Permission::create([
+            'name' => 'crear_unidad',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_unidad',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_unidad',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_unidad',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_unidad',
+            'guard_name' => 'web',
+        ]);
 
         // // pagos extras
 

@@ -15,20 +15,26 @@ class ImpuestosSeeder extends Seeder
     public function run()
     {
         Impuesto::create([
-            'nombre' => 'iva',
+            'nombre' => 'IVA',
+            'porcentaje' => '0.00',
+            'codigo' => '2'
+        ]);
+        Impuesto::create([
+            'nombre' => 'IVA',
             'porcentaje' => '12',
             'codigo' => '2'
         ]);
         Impuesto::create([
-            'nombre' => 'iva',
+            'nombre' => 'IVA',
             'porcentaje' => '14',
             'codigo' => '2'
         ]);
-
         Impuesto::create([
-            'nombre' => 'iva',
-            'porcentaje' => '0.00',
+            'nombre' => 'ICE',
+            'porcentaje' => '16',
             'codigo' => '2'
         ]);
+
+
     }
 }

@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre','barcode','costo','precio','stock','alertas','categoria_id'];
+    protected $fillable = ['nombre','barcode','costo','precio','stock','alertas','categoria_id','unidad_id'];
 
 
     public function categoria()
@@ -39,6 +39,14 @@ class Producto extends Model
     {
         return $this->hasMany(DetalleIngreso::class);
     }
+
+     // unidad de medida
+     public function unidad ()
+     {
+         return $this->belongsTo(Unidades::class);
+     }
+
+
 
 
 

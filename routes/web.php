@@ -15,7 +15,7 @@ use App\Http\Livewire\ImpuestoController;
 use App\Http\Livewire\IngresoController;
 use App\Http\Livewire\ProductosController;
 use App\Http\Livewire\ProveedorController;
-
+use App\Http\Livewire\UnidadesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +58,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('facturas', FacturasController::class);
 
+
+    Route::get('unidades', UnidadesController::class);
 
 
 

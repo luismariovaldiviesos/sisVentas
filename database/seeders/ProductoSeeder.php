@@ -21,7 +21,8 @@ class ProductoSeeder extends Seeder
         	'barcode' => '1',
         	'stock' => 25,
         	'alertas' => 20,
-        	'categoria_id' => 1
+        	'categoria_id' => 1,
+            'unidad_id' => 1
         ]);
 
 
@@ -32,7 +33,8 @@ class ProductoSeeder extends Seeder
         	'barcode' => '2',
         	'stock' => 20,
         	'alertas' => 18,
-        	'categoria_id' => 2
+        	'categoria_id' => 2,
+            'unidad_id' => 1
         ]);
         Producto::create([
         	'nombre' => 'atencion al cliente',
@@ -41,7 +43,8 @@ class ProductoSeeder extends Seeder
         	'barcode' => '3',
         	'stock' => 100,
         	'alertas' => 99,
-        	'categoria_id' => 3
+        	'categoria_id' => 3,
+            'unidad_id' => 1
         ]);
     }
 }

@@ -1,4 +1,6 @@
 <div class="row sales layout-top-spacing">
+    @can('facturar')
+
 
     <div class="col-sm-6">
         <div class="widget widget-chart-one">
@@ -82,9 +84,11 @@
     </div>
 
 
-
+    @endcan
 
 </div>
+
+
 
 <script src="{{ asset('js/keypress.js') }}"></script>
 <script src="{{ asset('js/onscan.js') }}"></script>

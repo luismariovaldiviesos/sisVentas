@@ -16,12 +16,11 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 255)->unique();
-            $table->string('barcode', 25)->nullable();
+            $table->string('barcode', 25)->unique();
             $table->decimal('costo', 10, 2)->default(0);
             $table->decimal('precio', 10, 2)->default(0);
             $table->integer('stock');
             $table->integer('alertas');
-
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
