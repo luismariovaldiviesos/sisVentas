@@ -33,6 +33,7 @@
 								<th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
 								<th class="table-th text-white text-center">IMPUESTOS</th>
+                                <th class="table-th text-white text-center">PVP</th>
                                 <th class="table-th text-white text-center">PROVEEDOR</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
@@ -68,8 +69,19 @@
 								<td class="text-center">
                                     @foreach ($product->impuestos as $imp )
                                    <span class="badge badge-success"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
+                                   {{-- @php
+                                       $impuestoProducto = $impuestoProducto +  ($product->precio * $imp->porcentaje) / 100;
+                                       $pvp = $product->precio + $impuestoProducto;
+                                   @endphp --}}
+
                                     @endforeach
 								</td>
+
+                                <td class="text-center">
+                                    <h6 class="text-center {{$product->stock <= $product->alerts ? 'text-danger' : '' }} ">
+										PRECIO DE VENTA
+									</h6>
+                                </td>
 
                                 <td class="text-center">
                                     @foreach ($product->proveedores as $prov )

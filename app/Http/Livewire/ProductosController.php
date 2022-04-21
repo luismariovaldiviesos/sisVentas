@@ -20,6 +20,8 @@ class ProductosController extends Component
     public $nombre,$barcode,$costo,$precio,$stock,$alertas,$categoria_id, $unidad_id, $search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 5;
 
+    public $pvp, $impuestoProducto = 0;
+
     public $selectedImpuestos =[];
 
     public $selectedProveedores =[];
@@ -32,7 +34,8 @@ class ProductosController extends Component
 
 	public function mount()
 	{
-
+        $this->pvp  =  $this->calculaPVP(1);
+        dd($this->pvp);
 		$this->pageTitle = 'Listado';
 		$this->componentName = 'Productos';
 		$this->categoria_id = 'Elegir';
@@ -110,12 +113,41 @@ class ProductosController extends Component
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
         $product->proveedores()->sync($this->selectedProveedores, true);
-        dd($product);
+
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
 
 	}
+
+    // public function calculaPVP(Producto $producto)
+    // {
+
+    //     $porcentaje = 0;
+    //     foreach($producto->impuestos as $imp)
+    //     {
+    //         $porcentaje =  $porcentaje + $imp->porcentaje;
+    //         $preciotem = ($producto->precio * $porcentaje) / 100;
+    //         $pvp = $producto->precio + $preciotem;
+
+    //     }
+    //     return $pvp;
+    // }
+
+    public function calculaPVP( Producto $producto)
+    {
+        //$producto =  Producto::find($id);
+        $porcentaje = 0;
+        $pvp  =  0;
+        foreach($producto->impuestos as $imp)
+        {
+             $porcentaje =  $porcentaje + $imp->porcentaje;
+        }
+        $preciotem = ($producto->precio * $porcentaje) / 100;
+        $pvp = $pvp + $producto->precio + $preciotem;
+        return $pvp;
+    }
+
 
 
 
