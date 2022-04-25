@@ -19,6 +19,7 @@ class CreateProductosTable extends Migration
             $table->string('barcode', 25)->unique();
             $table->decimal('costo', 10, 2)->default(0);
             $table->decimal('precio', 10, 2)->default(0);
+            $table->decimal('pvp', 10, 2)->default(0);
             $table->integer('stock');
             $table->integer('alertas');
             $table->unsignedBigInteger('categoria_id');

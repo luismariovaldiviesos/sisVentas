@@ -33,7 +33,7 @@
 								<th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
 								<th class="table-th text-white text-center">IMPUESTOS</th>
-                                <th class="table-th text-white text-center">PVP</th>
+                                <th class="table-th text-white text-center">PRECIO VENTA</th>
                                 <th class="table-th text-white text-center">PROVEEDOR</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
@@ -50,10 +50,9 @@
 								<td>
 									<h6 class="text-center">{{$product->categoria}}</h6>
 								</td>
-								<td>
-									<h6 class="text-center">{{$product->precio}}</h6>
-								</td>
-
+                                <td class="text-center">
+                                    <span class="badge badge-info"><h6 class="text-center">{{$product->precio }}</h6></span>
+                                  </td>
 
 								<td>
 									<h6 class="text-center {{$product->stock <= $product->alerts ? 'text-danger' : '' }} ">
@@ -68,20 +67,18 @@
 
 								<td class="text-center">
                                     @foreach ($product->impuestos as $imp )
-                                   <span class="badge badge-success"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
-                                   {{-- @php
-                                       $impuestoProducto = $impuestoProducto +  ($product->precio * $imp->porcentaje) / 100;
-                                       $pvp = $product->precio + $impuestoProducto;
-                                   @endphp --}}
-
+                                     <span class="badge badge-danger"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
                                     @endforeach
 								</td>
 
                                 <td class="text-center">
-                                    <h6 class="text-center {{$product->stock <= $product->alerts ? 'text-danger' : '' }} ">
-										PRECIO DE VENTA
-									</h6>
-                                </td>
+                                     <span class="badge badge-success"><h6 class="text-center">{{$product->pvp >= 0.00 ? $product->pvp : 'revisar pvp'  }}</h6></span>
+                               	</td>
+
+                            	{{-- <td>
+								 <span  class="badge bg-warning text-white text-center">
+                                    <h6 class="text-center"></h6></span>
+								</td> --}}
 
                                 <td class="text-center">
                                     @foreach ($product->proveedores as $prov )
@@ -127,22 +124,28 @@
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 
-		window.livewire.on('product-added', msg => {
+		window.livewire.on('product-added', Msg => {
 			$('#theModal').modal('hide')
+            noty(Msg)
 		});
-		window.livewire.on('product-updated', msg => {
+        window.livewire.on('product-error', Msg => {
+
+            noty(Msg, 2)
+		});
+		window.livewire.on('product-updated', Msg => {
 			$('#theModal').modal('hide')
+            noty(Msg)
 		});
-		window.livewire.on('product-deleted', msg => {
-			// noty
+		window.livewire.on('product-deleted', Msg => {
+            noty(Msg)
 		});
-		window.livewire.on('modal-show', msg => {
+		window.livewire.on('modal-show', Msg => {
 			$('#theModal').modal('show')
 		});
-		window.livewire.on('modal-hide', msg => {
+		window.livewire.on('modal-hide', Msg => {
 			$('#theModal').modal('hide')
 		});
-		window.livewire.on('hidden.bs.modal', msg => {
+		window.livewire.on('hidden.bs.modal', Msg => {
 			$('.er').css('display', 'none')
 		});
 		$('#theModal').on('hidden.bs.modal', function(e) {

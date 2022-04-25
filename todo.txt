@@ -46,3 +46,12 @@ dentro de la carpeta controladores:
 
     carrto en el video 46
 
+
+
+    ----------------------------------------------------------------------------------------------------
+
+    https://livewire-powergrid.com/#/get-started/install
+
+
+    tables
+

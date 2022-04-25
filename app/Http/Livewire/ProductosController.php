@@ -10,6 +10,7 @@ use App\Models\Unidades;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use DB;
 
 class ProductosController extends Component
 {
@@ -34,8 +35,8 @@ class ProductosController extends Component
 
 	public function mount()
 	{
-        $this->pvp  =  $this->calculaPVP(1);
-        dd($this->pvp);
+        // $this->pvp  =  $this->calculaPVP(1);
+        // dd($this->pvp);
 		$this->pageTitle = 'Listado';
 		$this->componentName = 'Productos';
 		$this->categoria_id = 'Elegir';
@@ -72,7 +73,12 @@ class ProductosController extends Component
 
     public function Store()
 	{
-        //dd($this->selectedImpuestos);
+        $cont = count($this->selectedImpuestos);
+        if($cont <= 0)
+        {
+            $this->emit('product-error','AGREGA AL MENOS UN IMPUESTO AL PRODUCTO');
+			return;
+        }
 		$rules  =[
 			'nombre' => 'required|unique:productos|min:3',
             'barcode' => "required|unique:productos,barcode",
@@ -113,26 +119,15 @@ class ProductosController extends Component
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
         $product->proveedores()->sync($this->selectedProveedores, true);
-
+        $this->pvp =  $this->calculaPVP($product);
+        $affected =  DB::table('productos')->where('id', $product->id)->update(['pvp' => $this->pvp]);
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
 
 	}
 
-    // public function calculaPVP(Producto $producto)
-    // {
 
-    //     $porcentaje = 0;
-    //     foreach($producto->impuestos as $imp)
-    //     {
-    //         $porcentaje =  $porcentaje + $imp->porcentaje;
-    //         $preciotem = ($producto->precio * $porcentaje) / 100;
-    //         $pvp = $producto->precio + $preciotem;
-
-    //     }
-    //     return $pvp;
-    // }
 
     public function calculaPVP( Producto $producto)
     {
@@ -228,6 +223,8 @@ class ProductosController extends Component
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
         $product->proveedores()->sync($this->selectedProveedores, true);
+        $this->pvp =  $this->calculaPVP($product);
+        $affected =  DB::table('productos')->where('id', $product->id)->update(['pvp' => $this->pvp]);
 	    $this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
 	}
