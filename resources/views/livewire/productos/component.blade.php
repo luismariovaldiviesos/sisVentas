@@ -72,7 +72,7 @@
 								</td>
 
                                 <td class="text-center">
-                                     <span class="badge badge-success"><h6 class="text-center">{{$product->pvp >= 0.00 ? $product->pvp : 'revisar pvp'  }}</h6></span>
+                                     {{-- <span class="badge badge-success"><h6 class="text-center">{{$product->pvp >= 0.00 ? $product->pvp : 'revisar pvp'  }}</h6></span> --}}
                                	</td>
 
                             	{{-- <td>

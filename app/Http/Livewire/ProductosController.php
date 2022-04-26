@@ -25,6 +25,8 @@ class ProductosController extends Component
 
     public $selectedImpuestos =[];
 
+    public $impuestosProductos = []; // para sabe qué impuestos ya estan vinculados al producto
+
     public $selectedProveedores =[];
 
     public function paginationView()
@@ -176,6 +178,8 @@ class ProductosController extends Component
 		$this->alertas = $product->alertas;
 		$this->categoria_id = $product->categoria_id;
         $this->unidad_id = $product->unidad_id;
+        $this->impuestosProductos =  $product->impuestos;
+        //dd($this->selectedImpuestos);
 		$this->emit('modal-show','Show modal');
 	}
 

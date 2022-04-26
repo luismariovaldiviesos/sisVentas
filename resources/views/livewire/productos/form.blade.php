@@ -84,7 +84,7 @@
 
     <div class="col-sm-12 col-md-12">
         <div class="form-group">
-            <label>Impuestos</label>
+            <label>Seleeccionar Impuestos</label>
             @foreach($impuestos as $impuesto)
             <div class="mt-1">
                    <label class="inline-flex items-center">
@@ -92,6 +92,10 @@
                         <span class="ml-3 text-sm">{{$impuesto->nombre}} {{$impuesto->porcentaje}}%</span>
                     </label>
                </div>
+            @endforeach
+            <p>Impuestos en este producto :</p>
+            @foreach ($impuestosProductos as $impuestoGravado)
+            <span class="ml-3 text-sm">{{$impuestoGravado->nombre}} {{$impuestoGravado->porcentaje}}%</span>
             @endforeach
             {{-- @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror --}}
         </div>

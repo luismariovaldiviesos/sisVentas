@@ -12,6 +12,7 @@ trait CartTrait
         {
 
             $product = Producto::where('barcode', $barcode)->first();
+            //dd($product);
 
             if($product == null || empty($product))
             {
@@ -31,7 +32,7 @@ trait CartTrait
                     }
 
 
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                    Cart::add($product->id, $product->nombre, $product->pvp, $cant);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
@@ -75,7 +76,7 @@ trait CartTrait
 
 
         //        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-                Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                Cart::add($product->id, $product->nombre, $product->pvp, $cant);
                 $this->total = Cart::getTotal();
                 $this->itemsQuantity = Cart::getTotalQuantity();
                 $this->emit('scan-ok', $title);
@@ -108,7 +109,7 @@ trait CartTrait
 
                 if($cant > 0)
                 {
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                    Cart::add($product->id, $product->nombre, $product->pvp, $cant);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
                     $this->emit('scan-ok', $title);
@@ -138,7 +139,7 @@ trait CartTrait
             $newQty = ($item->quantity) - 1;
 
             if($newQty > 0)
-                    Cart::add($item->id, $item->name, $item->price, $newQty, $img);
+                    Cart::add($item->id, $item->name, $item->pvp, $newQty, $img);
                     //Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
 
 
