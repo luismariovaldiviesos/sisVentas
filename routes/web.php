@@ -16,6 +16,7 @@ use App\Http\Livewire\IngresoController;
 use App\Http\Livewire\ProductosController;
 use App\Http\Livewire\ProveedorController;
 use App\Http\Livewire\UnidadesController;
+use App\Http\Livewire\ImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('categorias', CategoriaController::class);
     Route::get('impuestos', ImpuestoController::class);
     Route::get('productos', ProductosController::class);
+    Route::get('import', ImportController::class);  // para importar productos
     Route::get('proveedores', ProveedorController::class);
     Route::get('ingresos', IngresoController::class);
     Route::get('egresos', EgresosController::class);

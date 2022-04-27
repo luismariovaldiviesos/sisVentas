@@ -22,7 +22,7 @@ class ProductosController extends Component
 
 
     public $nombre,$barcode,$costo,$precio,$stock,$alertas,$categoria_id, $unidad_id, $search,$selected_id,$pageTitle,$componentName;
-	private $pagination = 5;
+	private $pagination = 20;
 
     public $pvp, $impuestoProducto = 0;
 
@@ -58,12 +58,12 @@ class ProductosController extends Component
 		->where('productos.nombre', 'like', '%' . $this->search . '%')
 		->orWhere('productos.barcode', 'like', '%' . $this->search . '%')
 		->orWhere('c.nombre', 'like', '%' . $this->search . '%')
-		->orderBy('productos.id', 'desc')  // ultimo ingresado arriba
+		->orderBy('productos.id', 'asc')  // ultimo ingresado arriba
 		->paginate($this->pagination);
 		else
 		 $products = Producto::join('categorias as c','c.id','productos.categoria_id')
 		->select('productos.*','c.nombre as categoria')
-		->orderBy('productos.id', 'desc')
+		->orderBy('productos.id', 'asc')
 		->paginate($this->pagination);
 
 		return view('livewire.productos.component', [

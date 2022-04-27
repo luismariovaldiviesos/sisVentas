@@ -9,9 +9,13 @@
 				<ul class="tabs tab-pills">
 
 					<li>
-						<a href="{{url('import')}}" class="tabmenu bg-dark mr-3">Importar</a>
-						@can('crear_permiso')
-						<a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
+                        @can('importar_producto')
+                            <a href="{{url('import')}}" class="tabmenu bg-dark mr-3">Importar</a>
+                        @endcan
+
+
+                        @can('crear_producto')
+						    <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
 						@endcan
 					</li>
 
@@ -27,8 +31,8 @@
 						<thead class="text-white" style="background: #3B3F5C;">
 							<tr>
 								<th class="table-th text-white">DESCRIPCIÓN</th>
-								<th class="table-th text-white text-center">BARCODE</th>
-								<th class="table-th text-white text-center">CATEGORÍA</th>
+								<th class="table-th text-white text-center">CODIGO</th>
+								<th class="table-th text-white text-center">CATEGORIA</th>
                                 <th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
 								<th class="table-th text-white text-center">PRECIO</th>
@@ -48,19 +52,19 @@
                                 {{-- --------------------- --}}
 
                                 {{-- CODIFO DE  BARRAS --}}
-								<td>
-									<h6 class="text-center">{{$product->barcode}}</h6>
+								<td class="text-center">
+									<span class="badge badge-dark"><h6 class="text-center text-white">{{$product->barcode}}</h6></span>
 								</td>
                                 {{-- --------------------- --}}
 
                                 {{-- CATEGORIA --}}
-								<td>
+								<td class="text-center">
 									<h6 class="text-center">{{$product->categoria}}</h6>
 								</td>
                                 {{-- --------------------- --}}
 
                                 {{-- STOCK  --}}
-								<td>
+								<td class="text-center">
 									<h6 class="text-center {{$product->stock <= $product->alerts ? 'text-danger' : '' }} ">
 										{{$product->stock}}
 									</h6>
@@ -68,14 +72,14 @@
                                 {{-- --------------------- --}}
 
                                 {{-- STOCK MINIMO  --}}
-								<td>
+								<td class="text-center">
 									<h6 class="text-center">{{$product->alertas}}</h6>
 								</td>
                                 {{-- --------------------- --}}
 
                                  {{-- PRECIO --}}
                                  <td class="text-center">
-                                    <span class="badge badge-dark"><h6 class="text-center text-white">{{$product->precio }}</h6></span>
+                                    <span class="badge badge-warning"><h6 class="text-center text-white">{{$product->precio }}</h6></span>
                                 </td>
                                 {{-- --------------------- --}}
 
@@ -114,18 +118,18 @@
 
 								<td class="text-center">
 									@can('editar_producto')
-									<a href="javascript:void(0)" wire:click.prevent="Edit({{$product->id}})" class="btn btn-dark mtmobile" title="Edit">
-										<i class="fas fa-edit"></i>
-									</a>
-
+                                        <a href="javascript:void(0)" wire:click.prevent="Edit({{$product->id}})" class="btn btn-dark mtmobile" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 									@endcan
+
 									@can('eliminar_producto')
-									{{-- @if($product->ventas->count() < 1)  --}}
-                                        <a href="javascript:void(0)" onclick="Confirm('{{$product->id}}')" class="btn btn-dark" title="Delete">
-										<i class="fas fa-trash"></i>
-										</a>
-									{{-- @endif --}}
-										@endcan
+                                        {{-- @if($product->ventas->count() < 1)  --}}
+                                            <a href="javascript:void(0)" onclick="Confirm('{{$product->id}}')" class="btn btn-dark" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                            </a>
+                                        {{-- @endif --}}
+									@endcan
 										<button type="button" wire:click.prevent="ScanCode('{{$product->barcode}}')" class="btn btn-dark"><i class="fas fa-shopping-cart"></i></button>
 								</td>
 							</tr>

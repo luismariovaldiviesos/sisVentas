@@ -112,6 +112,10 @@ class RoleSeeder extends Seeder
             'name' => 'eliminar_producto',
             'guard_name' => 'web',
         ]);
+        Permission::create([
+            'name' => 'importar_producto',
+            'guard_name' => 'web',
+        ]);
 
         // // permisos pacientes
 
