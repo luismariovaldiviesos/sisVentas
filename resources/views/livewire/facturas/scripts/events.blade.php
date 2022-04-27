@@ -10,6 +10,12 @@
 			doAction()
 		})
 
+        window.livewire.on('tax-notfound', Msg => {
+			noty(Msg, 2)
+			doImpuestos()
+		})
+
+
 		window.livewire.on('no-stock', Msg => {
 			noty(Msg, 2)
 		})

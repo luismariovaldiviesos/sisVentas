@@ -56,4 +56,25 @@
         })
 	}
 
+    function doImpuestos()
+	{
+		swal({
+			title: '!! PRODUCTO SIN IMPUESTOS !!',
+			text: '¿QUIERES REGISTRAR EL IMPUESTO EN EL PRODUCTO?',
+			type: 'warning',
+			showCancelButton: true,
+			cancelButtonText: 'NO',
+			cancelButtonColor: '#fff',
+			confirmButtonColor: '#3B3F5C',
+			confirmButtonText: 'SI'
+		}).then(function(result) {
+			if(result.value){
+               //$('#theModal').modal('show')
+               window.location = '/productos'
+                swal.close()
+            }
+
+        })
+	}
+
 </script>

@@ -12,12 +12,18 @@ trait CartTrait
         {
 
             $product = Producto::where('barcode', $barcode)->first();
-            //dd($product);
+            // $impus = count($product->impuestos);
+            // dd($impus);
 
             if($product == null || empty($product))
             {
-                    $this->emit('scan-notfound','El producto no está registrado*');
-            }  else {
+                    $this->emit('scan-notfound','El producto no está registrado');
+            }
+            elseif( count($product->impuestos) == 0)
+            {
+                $this->emit('tax-notfound','El producto no tiene impuestos');
+            }
+            else {
 
                     if($this->InCart($product->id))
                     {
@@ -134,18 +140,18 @@ trait CartTrait
             $item = Cart::get($productId);
             Cart::remove($productId);
             // si el producto no tiene imagen, mostramos una default
-            $img = (count($item->attributes) > 0 ? $item->attributes[0] : Producto::find($productId)->imagen);
+            //$img = (count($item->attributes) > 0 ? $item->attributes[0] : Product::find($productId)->imagen);
 
             $newQty = ($item->quantity) - 1;
 
             if($newQty > 0)
-                    Cart::add($item->id, $item->name, $item->pvp, $newQty, $img);
+                    Cart::add($item->id, $item->name, $item->price, $newQty);
                     //Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
 
 
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-            $this->emit('scan-ok', 'Cantidad actualizada*');
+            $this->emit('scan-ok', 'Cantidad actualizada****');
 
 
         }
