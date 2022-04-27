@@ -11,12 +11,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use DB;
+use App\Traits\CartTrait;
 
 class ProductosController extends Component
 {
 
     use WithPagination;
 	use WithFileUploads;
+    use CartTrait;
+
 
     public $nombre,$barcode,$costo,$precio,$stock,$alertas,$categoria_id, $unidad_id, $search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 5;
@@ -43,6 +46,7 @@ class ProductosController extends Component
 		$this->componentName = 'Productos';
 		$this->categoria_id = 'Elegir';
         $this->unidad_id = 'Elegir';
+        $this->selected_id = 0;
 
 	}
 
@@ -243,5 +247,12 @@ class ProductosController extends Component
 		$this->resetUI();
 		$this->emit('product-deleted', 'Producto Eliminado');
 	}
+
+
+    public  function ScanCode($code)
+    {
+        $this->ScanearCode($code);
+        $this->emit('product-added','SE AGREGÓ EL PRODUCTO A LA VENTA');
+    }
 
 }

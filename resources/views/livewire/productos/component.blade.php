@@ -29,9 +29,9 @@
 								<th class="table-th text-white">DESCRIPCIÓN</th>
 								<th class="table-th text-white text-center">BARCODE</th>
 								<th class="table-th text-white text-center">CATEGORÍA</th>
-								<th class="table-th text-white text-center">PRECIO</th>
-								<th class="table-th text-white text-center">STOCK</th>
+                                <th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
+								<th class="table-th text-white text-center">PRECIO</th>
 								<th class="table-th text-white text-center">IMPUESTOS</th>
                                 <th class="table-th text-white text-center">PRECIO VENTA</th>
                                 <th class="table-th text-white text-center">PROVEEDOR</th>
@@ -41,50 +41,76 @@
 						<tbody>
 							@foreach($data as $product)
 							<tr>
+                                {{-- DESCRIPCION --}}
 								<td>
-									<h6 class="text-left">{{$product->nombre}}</h6>
+									<span class="badge badge-warning"><h6 class="text-left text-white">{{$product->nombre}}</h6></span>
 								</td>
+                                {{-- --------------------- --}}
+
+                                {{-- CODIFO DE  BARRAS --}}
 								<td>
 									<h6 class="text-center">{{$product->barcode}}</h6>
 								</td>
+                                {{-- --------------------- --}}
+
+                                {{-- CATEGORIA --}}
 								<td>
 									<h6 class="text-center">{{$product->categoria}}</h6>
 								</td>
-                                <td class="text-center">
-                                    <span class="badge badge-info"><h6 class="text-center">{{$product->precio }}</h6></span>
-                                  </td>
+                                {{-- --------------------- --}}
 
+                                {{-- STOCK  --}}
 								<td>
 									<h6 class="text-center {{$product->stock <= $product->alerts ? 'text-danger' : '' }} ">
 										{{$product->stock}}
 									</h6>
 								</td>
+                                {{-- --------------------- --}}
 
-
+                                {{-- STOCK MINIMO  --}}
 								<td>
 									<h6 class="text-center">{{$product->alertas}}</h6>
 								</td>
+                                {{-- --------------------- --}}
 
-								<td class="text-center">
-                                    @foreach ($product->impuestos as $imp )
-                                     <span class="badge badge-danger"><h6 class="text-center">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
-                                    @endforeach
-								</td>
+                                 {{-- PRECIO --}}
+                                 <td class="text-center">
+                                    <span class="badge badge-dark"><h6 class="text-center text-white">{{$product->precio }}</h6></span>
+                                </td>
+                                {{-- --------------------- --}}
 
+                                {{-- IMPUESTOS  --}}
                                 <td class="text-center">
-                                     {{-- <span class="badge badge-success"><h6 class="text-center">{{$product->pvp >= 0.00 ? $product->pvp : 'revisar pvp'  }}</h6></span> --}}
+                                    @if (count($product->impuestos) > 0)
+                                        @foreach ($product->impuestos as $imp )
+                                        <span class="badge badge-info"><h6 class="text-center text-white">{{$imp->nombre}}-{{$imp->porcentaje}}%</h6></span>
+                                        @endforeach
+                                    @else
+                                        <span class="badge badge-info"><h6 class="text-center text-white">S-I</h6></span>
+                                     @endif
+								</td>
+                                {{-- --------------------- --}}
+
+
+                                {{-- PVP  --}}
+                                <td class="text-center">
+                                     <span class="badge badge-warning"><h6 class="text-center text-white">{{$product->pvp}}</h6></span>
                                	</td>
+                                {{-- --------------------- --}}
 
-                            	{{-- <td>
-								 <span  class="badge bg-warning text-white text-center">
-                                    <h6 class="text-center"></h6></span>
-								</td> --}}
 
+                                 {{-- PROVEEDORES  --}}
                                 <td class="text-center">
-                                    @foreach ($product->proveedores as $prov )
-                                   <span class="badge badge-success"><h6 class="text-center">{{$prov->nombre}}</h6></span>
-                                    @endforeach
+                                    @if (count($product->proveedores)> 0)
+                                        @foreach ($product->proveedores as $prov )
+                                        <span class="badge badge-success"><h6 class="text-center">{{$prov->nombre}}</h6></span>
+                                        @endforeach
+                                    @else
+                                        <span class="badge badge-info"><h6 class="text-center text-white">S-P</h6></span>
+
+                                    @endif
 								</td>
+                                 {{-- --------------------- --}}
 
 								<td class="text-center">
 									@can('editar_producto')
