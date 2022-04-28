@@ -89,7 +89,7 @@ class FacturasController extends Component
         }
 
         $this->clientes = $clientes;
-       // dd($clientes);
+       //dd($clientes);
         return view('livewire.facturas.component', [
 
             'empresa' =>  $empresa,
@@ -154,6 +154,7 @@ class FacturasController extends Component
 
     public  function  mostrarCliente($cliente)
     {
+        dd($cliente);
         $this->clientes = '';
         $this->buscarCliente = '';
         $clienteJson = json_decode($cliente);
