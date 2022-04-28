@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class RoleSeeder extends Seeder
 {
@@ -15,26 +16,38 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
-            'name' => 'administrador',
-            'guard_name' => 'web',
+
+         //creación de usuarios
+         User::create([
+            'name'=> 'Luis Mario',
+            'ci' => '0104649843',
+            'phone' => '2255181',
+            'email' => 'admin@mail.com',
+            'profile' => 'administrador',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('administrador')
+        ]);
+        User::create([
+            'name'=> 'ximena chhocho',
+            'ci' => '0103844494',
+            'phone' => '2255181',
+            'email' => 'ximena@mail.com',
+            'profile' => 'empleado',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('empleado')
         ]);
 
-        Role::create([
-            'name' => 'empleado',
-            'guard_name' => 'web',
-        ]);
-
-        Role::create([
-            'name' => 'visitante',
-            'guard_name' => 'web',
-        ]);
+         //creación de roles
+         $admin    = Role::create(['name' => 'administrador']);
+         $empleado = Role::create(['name' => 'empleado']);
 
 
-        // permisos categorias
 
-        Permission::create([
-            'name' => 'crear_categoria',
+
+
+         //creación de permisos:
+          //categorias
+        Permission::create(['name' => 'crear_categoria',
             'guard_name' => 'web',
         ]);
         Permission::create([
@@ -54,8 +67,7 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        // permisos clinica
-
+        // permisos empresa
 
         Permission::create([
             'name' => 'ver_empresa',
@@ -204,13 +216,14 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-         //permisos factura
+        //permisos factura
 
-         Permission::create([
+        Permission::create([
 
             'name' => 'facturar',
             'guard_name' => 'web'
          ]);
+
 
          // permisos unidades de medida
 
@@ -235,28 +248,6 @@ class RoleSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
-        // // pagos extras
-
-        //  Permission::create([
-        //     'name' => 'crear_pagoextra',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'ver_pagoextra',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'buscar_pagoextra',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'editar_pagoextra',
-        //     'guard_name' => 'web',
-        // ]);
-        // Permission::create([
-        //     'name' => 'eliminar_pagoextra',
-        //     'guard_name' => 'web',
-        // ]);
 
         // // roles
 
@@ -311,28 +302,118 @@ class RoleSeeder extends Seeder
         ]);
 
 
+         //asignar permisos al role Admin
+
+         $admin->givePermissionTo([
+
+            'crear_categoria',
+            'ver_categoria',
+            'buscar_categoria',
+            'editar_categoria',
+            'eliminar_categoria',
+
+            //empresa
+            'ver_empresa',
+            'editar_empresa',
+
+            //impuestos
+            'crear_impuesto',
+            'ver_impuesto',
+            'buscar_impuesto',
+            'editar_impuesto',
+            'eliminar_impuesto',
 
 
-        // //agenda
 
-        // Permission::create([
-        //     'name' => 'ver_calendario',
-        //     'guard_name' => 'web',
-        // ]);
+            //productos
+            'crear_producto',
+            'ver_producto',
+            'buscar_producto',
+            'editar_producto',
+            'eliminar_producto',
+            'importar_producto',
 
-        // //reportes
+            //proveedror
+            'crear_proveedor',
+            'ver_proveedor',
+            'buscar_proveedor',
+            'editar_proveedor',
+            'eliminar_proveedor',
 
-        // Permission::create([
-        //     'name' => 'ver_reporte',
-        //     'guard_name' => 'web',
-        // ]);
+            //ingreso
+            'crear_ingreso',
+            'ver_ingreso',
+            'buscar_ingreso',
+            'detalle_ingreso',
 
-        // // estadisticas
+            //egreso
+            'crear_egreso',
+            'ver_egreso',
+            'buscar_egreso',
+            'detalle_egreso',
 
-        // Permission::create([
-        //     'name' => 'ver_estadistica',
-        //     'guard_name' => 'web',
-        // ]);
+            //cliente
+            'crear_cliente',
+            'ver_cliente',
+            'buscar_cliente',
+            'editar_cliente',
+            'eliminar_cliente',
+
+            //factura
+            'facturar',
+
+            // unidad de medida
+            'crear_unidad',
+            'ver_unidad',
+            'buscar_unidad',
+            'editar_unidad',
+            'eliminar_unidad',
+
+            //roles
+            'crear_rol',
+            'ver_rol',
+            'buscar_rol',
+            'editar_rol',
+            'eliminar_rol',
+
+               //permisos
+               'crear_permiso',
+               'ver_permiso',
+               'buscar_permiso',
+               'editar_permiso',
+               'eliminar_permiso',
+
+               //asignar permiso
+               'ver_asignar',
+
+         ]);
+
+          //asignar permisos al role Employee
+        $empleado->givePermissionTo([
+        //cliente
+         'crear_cliente',
+         'ver_cliente',
+         'buscar_cliente',
+         'editar_cliente',
+         'eliminar_cliente',
+
+         //factura
+         'facturar',
+        ]);
+
+         //asignar rol al usuario admin
+         $uAdmin = User::find(1);
+         $uAdmin->assignRole('administrador');
+
+         //asignar rol al usuario empleado
+         $uEmpleado = User::find(2);
+         $uEmpleado->assignRole('empleado');
+
+
+
+
+
+
 
 
 
