@@ -154,7 +154,7 @@ class FacturasController extends Component
 
     public  function  mostrarCliente($cliente)
     {
-        dd($cliente);
+        //dd($cliente);
         $this->clientes = '';
         $this->buscarCliente = '';
         $clienteJson = json_decode($cliente);
