@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Categoria;
+use App\Models\Descuento;
 use App\Models\Impuesto;
 use App\Models\Producto;
 use App\Models\Proveedor;
@@ -24,13 +25,17 @@ class ProductosController extends Component
     public $nombre,$barcode,$costo,$precio,$stock,$alertas,$categoria_id, $unidad_id, $search,$selected_id,$pageTitle,$componentName;
 	private $pagination = 20;
 
-    public $pvp, $impuestoProducto = 0;
+    public $pvp, $impuestoProducto = 0 ;
 
     public $selectedImpuestos =[];
 
     public $impuestosProductos = []; // para sabe qué impuestos ya estan vinculados al producto
 
     public $selectedProveedores =[];
+
+    public $descuento_id;
+
+
 
     public function paginationView()
 	{
@@ -71,7 +76,8 @@ class ProductosController extends Component
 			'categorias' => Categoria::orderBy('id', 'asc')->get(),
             'impuestos' => Impuesto::orderBy('id','asc')->get(),
             'proveedores' => Proveedor::orderBy('id','asc')->get(),
-            'unidades' => Unidades::orderBy('id','asc')->get()
+            'unidades' => Unidades::orderBy('id','asc')->get(),
+            'descuentos' => Descuento::orderBy('id','asc')->get()
 		])
 		->extends('layouts.theme.app')
 		->section('content');
@@ -79,10 +85,16 @@ class ProductosController extends Component
 
     public function Store()
 	{
+        //dd($this->descuento_id);
         $cont = count($this->selectedImpuestos);
         if($cont <= 0)
         {
             $this->emit('product-error','AGREGA AL MENOS UN IMPUESTO AL PRODUCTO');
+			return;
+        }
+        if($this->descuento_id ==  null)
+        {
+            $this->emit('product-error','AGREGA AL MENOS UN DESCUENTO AL PRODUCTO');
 			return;
         }
 		$rules  =[
@@ -127,6 +139,15 @@ class ProductosController extends Component
         $product->proveedores()->sync($this->selectedProveedores, true);
         $this->pvp =  $this->calculaPVP($product);
         $affected =  DB::table('productos')->where('id', $product->id)->update(['pvp' => $this->pvp]);
+		if($product)
+		{
+            DB::table('descuento_producto')
+            ->updateOrInsert(
+                ['descuento_id' => $this->descuento_id],
+                ['producto_id' => $product->id]
+            );
+
+		}
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
@@ -167,6 +188,7 @@ class ProductosController extends Component
         $this->unidad_id='Elegir';
 	    $this->selected_id = 0;
         $this->selectedImpuestos = [];
+        $this->selectedProveedores = [];
 
 
 	}
@@ -238,8 +260,10 @@ class ProductosController extends Component
 	}
 
     protected $listeners =[
-		'deleteRow' => 'Destroy'
+		'deleteRow' => 'Destroy',
+
 	];
+
 
     public function Destroy(Producto $product)
 	{

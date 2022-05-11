@@ -30,7 +30,7 @@ class ImpuestoController extends Component
 		if(strlen($this->search) > 0)
 			$data = Impuesto::where('nombre', 'like', '%' . $this->search . '%')->paginate($this->pagination);
 		else
-			$data = Impuesto::orderBy('id','desc')->paginate($this->pagination);
+			$data = Impuesto::orderBy('id','asc')->paginate($this->pagination);
 
 
 

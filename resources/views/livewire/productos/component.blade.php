@@ -31,7 +31,7 @@
 						<thead class="text-white" style="background: #3B3F5C;">
 							<tr>
 								<th class="table-th text-white">DESCRIPCIÓN</th>
-								<th class="table-th text-white text-center">CODIGO</th>
+								<th class="table-th text-white text-center">CODIGO de barras</th>
 								<th class="table-th text-white text-center">CATEGORIA</th>
                                 <th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
@@ -56,6 +56,8 @@
 									<span class="badge badge-dark"><h6 class="text-center text-white">{{$product->barcode}}</h6></span>
 								</td>
                                 {{-- --------------------- --}}
+
+
 
                                 {{-- CATEGORIA --}}
 								<td class="text-center">
@@ -165,6 +167,7 @@
 		window.livewire.on('product-updated', Msg => {
 			$('#theModal').modal('hide')
             noty(Msg)
+
 		});
 		window.livewire.on('product-deleted', Msg => {
             noty(Msg)
@@ -174,6 +177,7 @@
 		});
 		window.livewire.on('modal-hide', Msg => {
 			$('#theModal').modal('hide')
+
 		});
 		window.livewire.on('hidden.bs.modal', Msg => {
 			$('.er').css('display', 'none')
@@ -208,4 +212,7 @@
 
 		})
 	}
+
+
+
 </script>

@@ -17,6 +17,7 @@ use App\Http\Livewire\ProductosController;
 use App\Http\Livewire\ProveedorController;
 use App\Http\Livewire\UnidadesController;
 use App\Http\Livewire\ImportController;
+use App\Http\Livewire\DescuentosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,7 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('unidades', UnidadesController::class);
+    Route::get('descuentos', DescuentosController::class);
 
 
 

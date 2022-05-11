@@ -300,6 +300,28 @@ class RoleSeeder extends Seeder
             'name' => 'ver_asignar',
             'guard_name' => 'web',
         ]);
+         //  // descuentos
+
+         Permission::create([
+            'name' => 'crear_descuento',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'ver_descuento',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'buscar_descuento',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'editar_descuento',
+            'guard_name' => 'web',
+        ]);
+        Permission::create([
+            'name' => 'eliminar_descuento',
+            'guard_name' => 'web',
+        ]);
 
 
          //asignar permisos al role Admin
@@ -385,6 +407,14 @@ class RoleSeeder extends Seeder
 
                //asignar permiso
                'ver_asignar',
+
+
+                //descuentos
+            'crear_descuento',
+            'ver_descuento',
+            'buscar_descuento',
+            'editar_descuento',
+            'eliminar_descuento',
 
          ]);
 

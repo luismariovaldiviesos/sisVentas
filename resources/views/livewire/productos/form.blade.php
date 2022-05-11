@@ -80,11 +80,23 @@
             @error('unidad_id') <span class="text-danger er">{{ $message}}</span>@enderror
         </div>
     </div>
+    <div class="col-sm-12 col-md-4">
+        <div class="form-group">
+            <label>Descuento</label>
+            <select wire:model='descuento_id' class="form-control">
+                <option  disabled>Elegir</option>
+                @foreach($descuentos as $descuento)
+                <option value="{{$descuento->id}}" >{{$descuento->porcentaje}}</option>
+                @endforeach
+            </select>
+            @error('unidad_id') <span class="text-danger er">{{ $message}}</span>@enderror
+        </div>
+    </div>
 
 
     <div class="col-sm-12 col-md-12">
-        <div class="form-group">
-            <label>Seleeccionar Impuestos</label>
+        <div class="form-group col-sm-12 col-md-12">
+            <h5>Seleeccionar Impuestos</h5>
             @foreach($impuestos as $impuesto)
             <div class="mt-1">
                    <label class="inline-flex items-center">
@@ -95,7 +107,12 @@
             @endforeach
             <p>Impuestos en este producto :</p>
             @foreach ($impuestosProductos as $impuestoGravado)
-            <span class="ml-3 text-sm">{{$impuestoGravado->nombre}} {{$impuestoGravado->porcentaje}}%</span>
+               @if  ( count($impuestosProductos) > 0 )
+               <span class="ml-3 text-sm">{{$impuestoGravado->nombre}} {{$impuestoGravado->porcentaje}}%</span>
+
+               @else
+                <h1 class="ml-3 text-sm">NO REGISTRA IMPUESTO</h1>
+               @endif
             @endforeach
             {{-- @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror --}}
         </div>
@@ -103,7 +120,7 @@
 
     <div class="col-sm-12 col-md-12">
         <div class="form-group">
-            <label>Proveedor</label>
+            <h5>Proveedor</h5>
             @foreach($proveedores as $proveedor)
             <div class="mt-1">
                    <label class="inline-flex items-center">
@@ -115,6 +132,8 @@
             {{-- @error('categoryid') <span class="text-danger er">{{ $message}}</span>@enderror --}}
         </div>
     </div>
+
+
 </div>
 
 {{-- <div class="row mt-3">

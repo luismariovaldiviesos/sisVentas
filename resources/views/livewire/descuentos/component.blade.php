@@ -10,18 +10,18 @@
 
 					<li>
 
-						@can('crear_descuento')
+						@can('crear_impuesto')
 						<a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal">Agregar</a>
 						@endcan
 					</li>
 
 				</ul>
 			</div>
-			@can('buscar_descuento')
+			@can('buscar_impuesto')
 			@include('common.searchbox')
 			@endcan
 
-            @can('ver_descuento')
+            @can('ver_impuesto')
 
 
 			<div class="widget-content">
@@ -31,39 +31,31 @@
 						<thead class="text-white" style="background: #3B3F5C;">
 							<tr>
                                 <th class="table-th text-white text-center">ID</th>
-                                <th class="table-th text-white text-center">NOMBRE</th>
 								<th class="table-th text-white text-center">PORCENTAJE</th>
-                                <th class="table-th text-white text-center">CODIGO SRI</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($data as $impuesto)
+							@foreach($data as $descuento)
 							<tr>
                                 <td>
-									<h6 class="text-center">{{$impuesto->id}}</h6>
-								</td>
-                                <td>
-									<h6 class="text-center">{{$impuesto->nombre}}</h6>
+									<h6 class="text-center">{{$descuento->id}}</h6>
 								</td>
 
 								<td>
-									<h6 class="text-center">{{$impuesto->porcentaje}} %</h6>
-								</td>
-                                <td>
-									<h6 class="text-center">{{$impuesto->codigo}}</h6>
+									<h6 class="text-center">{{$descuento->porcentaje}}</h6>
 								</td>
 
 
 								<td class="text-center">
-									@can('editar_impuesto')
-									<a href="javascript:void(0)" wire:click.prevent="Edit({{$impuesto->id}})" class="btn btn-dark mtmobile" title="Edit">
+									@can('editar_descuento')
+									<a href="javascript:void(0)" wire:click.prevent="Edit({{$descuento->id}})" class="btn btn-dark mtmobile" title="Edit">
 										<i class="fas fa-edit"></i>
 									</a>
 
 									@endcan
-									@can('eliminar_impuesto')
-									 <a href="javascript:void(0)" onclick="Confirm('{{$impuesto->id}}')" class="btn btn-dark" title="Delete">
+									@can('eliminar_descuento')
+									 <a href="javascript:void(0)" onclick="Confirm('{{$descuento->id}}')" class="btn btn-dark" title="Delete">
 										<i class="fas fa-trash"></i>
 										</a>
 										@endcan
@@ -86,22 +78,22 @@
 
 	</div>
 
-	@include('livewire.impuestos.form')
+	@include('livewire.descuentos.form')
 </div>
 
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 
-		window.livewire.on('impuesto-added', Msg => {
+		window.livewire.on('descuento-added', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('impuesto-updated', Msg => {
+        window.livewire.on('descuento-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('impuesto-deleted', Msg => {
+        window.livewire.on('descuento-deleted', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })

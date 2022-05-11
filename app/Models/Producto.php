@@ -34,6 +34,8 @@ class Producto extends Model
         return $this->belongsToMany(Proveedor::class,'productos_proveedor');
     }
 
+
+
     // detalles ingresos
     public function detalles ()
     {
