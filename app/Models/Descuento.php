@@ -10,4 +10,10 @@ class Descuento extends Model
     use HasFactory;
 
     protected $fillable = ['porcentaje'];
+
+     // un descuento pertenece a varios prodcutos
+     public function productos(){
+        return $this->belongsToMany(Producto::class, 'descuento_producto');
+    }
 }
+

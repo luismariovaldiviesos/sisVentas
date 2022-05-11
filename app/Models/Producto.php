@@ -48,6 +48,12 @@ class Producto extends Model
          return $this->belongsTo(Unidades::class);
      }
 
+       // un producto puede tener varios descuentos
+   public function descuentos()
+   {
+        return $this->belongsToMany(Descuento::class,'descuento_producto');
+    }
+
 
 
 
