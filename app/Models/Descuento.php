@@ -11,9 +11,9 @@ class Descuento extends Model
 
     protected $fillable = ['porcentaje'];
 
-     // un descuento pertenece a varios prodcutos
+     // un descuento esta en muchos productos
      public function productos(){
-        return $this->belongsToMany(Producto::class, 'descuento_producto');
+        return $this->hasMany(Producto::class);
     }
 }
 

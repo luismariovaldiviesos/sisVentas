@@ -36,8 +36,8 @@
                                 <th class="table-th text-white text-center">STOCK</th>
 								<th class="table-th text-white text-center">INV.MIN</th>
 								<th class="table-th text-white text-center">PRECIO</th>
-								<th class="table-th text-white text-center">IMPUESTOS</th>
                                 <th class="table-th text-white text-center">DECUENTOS</th>
+								<th class="table-th text-white text-center">IMPUESTOS</th>
                                 <th class="table-th text-white text-center">PRECIO VENTA</th>
                                 <th class="table-th text-white text-center">PROVEEDOR</th>
 								<th class="table-th text-white text-center">ACTIONS</th>
@@ -86,6 +86,14 @@
                                 </td>
                                 {{-- --------------------- --}}
 
+                                        {{-- --------------------- --}}
+
+                                 {{-- descuento  --}}
+                                 <td class="text-center">
+                                    <span class="badge badge-info"><h6 class="text-center text-white">{{$product->descuento->porcentaje}}%</h6></span>
+								</td>
+                                {{-- --------------------- --}}
+
                                 {{-- IMPUESTOS  --}}
                                 <td class="text-center">
                                     @if (count($product->impuestos) > 0)
@@ -96,19 +104,6 @@
                                         <span class="badge badge-info"><h6 class="text-center text-white">S-I</h6></span>
                                      @endif
 								</td>
-                                {{-- --------------------- --}}
-
-                                 {{-- IMPUESTOS  --}}
-                                 <td class="text-center">
-                                    @if (count($product->descuentos) > 0)
-                                        @foreach ($product->descuentos as $desc )
-                                        <span class="badge badge-info"><h6 class="text-center text-white">{{$desc->porcentaje}}%</h6></span>
-                                        @endforeach
-                                    @else
-                                        <span class="badge badge-info"><h6 class="text-center text-white">S-D</h6></span>
-                                     @endif
-								</td>
-                                {{-- --------------------- --}}
 
 
                                 {{-- PVP  --}}

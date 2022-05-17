@@ -33,7 +33,7 @@ class ProductosController extends Component
 
     public $selectedProveedores =[];
 
-    public $descuento_id;
+    public $descuento_id, $descuentoProducto;
 
 
 
@@ -45,18 +45,20 @@ class ProductosController extends Component
 
 	public function mount()
 	{
-        // $this->pvp  =  $this->calculaPVP(1);
-        // dd($this->pvp);
-		$this->pageTitle = 'Listado';
+        $this->pageTitle = 'Listado';
 		$this->componentName = 'Productos';
 		$this->categoria_id = 'Elegir';
         $this->unidad_id = 'Elegir';
+        $this->descuento_id = 'Elegir';
         $this->selected_id = 0;
 
 	}
 
     public function render()
 	{
+        $product =  Producto::find(3);
+        //dd($this->calculaPVP($product));
+
 		if(strlen($this->search) > 0)
 			$products = Producto::join('categorias as c','c.id','productos.categoria_id')
 		->select('productos.*','c.nombre as categoria')
@@ -92,11 +94,12 @@ class ProductosController extends Component
             $this->emit('product-error','AGREGA AL MENOS UN IMPUESTO AL PRODUCTO');
 			return;
         }
-        if($this->descuento_id ==  null)
+        if($this->descuento_id ==  'Elegir')
         {
             $this->emit('product-error','AGREGA AL MENOS UN DESCUENTO AL PRODUCTO');
 			return;
         }
+
 		$rules  =[
 			'nombre' => 'required|unique:productos|min:3',
             'barcode' => "required|unique:productos,barcode",
@@ -105,7 +108,8 @@ class ProductosController extends Component
 			'stock' => 'required',
 			'alertas' => 'required',
 			'categoria_id' => 'required|not_in:Elegir',
-            'unidad_id' => 'required|not_in:Elegir'
+            'unidad_id' => 'required|not_in:Elegir',
+            'descuento_id' => 'required|not_in:Elegir'
 
 		];
 
@@ -120,7 +124,8 @@ class ProductosController extends Component
 			'stock.required' => 'El stock es requerido',
 			'alertas.required' => 'Ingresa el valor mínimo en existencias',
 			'categoria_id.not_in' => 'Elige un nombre de categoría diferente de Elegir',
-            'unidad_id.not_in' => 'Elige un nombre de unidad diferente de Elegir'
+            'unidad_id.not_in' => 'Elige un nombre de unidad diferente de Elegir',
+            'descuento_id.not_in' => 'Elige un descuento diferente de Elegir'
 		];
 
 		$this->validate($rules, $messages);
@@ -133,21 +138,14 @@ class ProductosController extends Component
 			'stock' => $this->stock,
 			'alertas' => $this->alertas,
 			'categoria_id' => $this->categoria_id,
-            'unidad_id' => $this->unidad_id
+            'unidad_id' => $this->unidad_id,
+            'descuento_id' => $this->descuento_id
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
         $product->proveedores()->sync($this->selectedProveedores, true);
         $this->pvp =  $this->calculaPVP($product);
         $affected =  DB::table('productos')->where('id', $product->id)->update(['pvp' => $this->pvp]);
-		if($product)
-		{
-            DB::table('descuento_producto')
-            ->updateOrInsert(
-                ['descuento_id' => $this->descuento_id],
-                ['producto_id' => $product->id]
-            );
 
-		}
 		$this->resetUI();
 		$this->emit('product-added', 'Producto Registrado');
 
@@ -160,14 +158,28 @@ class ProductosController extends Component
     {
         //$producto =  Producto::find($id);
         $porcentaje = 0;
-        $pvp  =  0;
+        //$pvp  =  0;
         foreach($producto->impuestos as $imp)
         {
              $porcentaje =  $porcentaje + $imp->porcentaje;
         }
-        $preciotem = ($producto->precio * $porcentaje) / 100;
-        $pvp = $pvp + $producto->precio + $preciotem;
+		// descuento porcentaje
+		$desPorcentaje =  $producto->descuento->porcentaje;
+
+        // descuento producto
+        $descuentoProducto  = ($producto->precio * $desPorcentaje) / 100;
+
+        //subtotal  precio
+        $subt  =  $producto->precio - $descuentoProducto;
+
+        // impuestos sobr el precio ya aplicado el descto si lo hay
+        $preciotem = ($subt * $porcentaje) / 100;
+
+        $pvp  = $subt + $preciotem;
+
+
         return $pvp;
+
     }
 
 
@@ -189,12 +201,15 @@ class ProductosController extends Component
 	    $this->selected_id = 0;
         $this->selectedImpuestos = [];
         $this->selectedProveedores = [];
+        $this->descuentoProducto ="";
 
 
 	}
 
     public function Edit(Producto $product)
 	{
+
+        //dd($this->descuentoProducto = $product->descuento->porcentaje);
 		$this->selected_id = $product->id;
 		$this->nombre = $product->nombre;
 		$this->barcode = $product->barcode;
@@ -205,9 +220,29 @@ class ProductosController extends Component
 		$this->categoria_id = $product->categoria_id;
         $this->unidad_id = $product->unidad_id;
         $this->impuestosProductos =  $product->impuestos;
-        //dd($this->selectedImpuestos);
-		$this->emit('modal-show','Show modal');
+        $this->descuentoProducto = $product->descuento;
+        $this->descuentoProducto = $product->descuento->porcentaje;
+        $this->emit('modal-show','Show modal');
 	}
+
+    // public function DescuentoProd($product)
+    // {
+    //     $descuentoProducto = $product->descuentos;
+    //     $porcentajeDescuento = 0;
+    //     if(count($descuentoProducto)> 0)
+    //     {
+    //        foreach($descuentoProducto as $d)
+    //        {
+    //             $temp =  $d->porcentaje;
+    //             $porcentajeDescuento = $porcentajeDescuento + $temp;
+    //        }
+    //     }
+    //     else
+    //     {
+    //         $porcentajeDescuento = $porcentajeDescuento;
+    //     }
+    //     return $porcentajeDescuento;
+    // }
 
 
     public function Update()
@@ -220,7 +255,8 @@ class ProductosController extends Component
 			'stock' => 'required',
 			'alertas' => 'required',
 			'categoria_id' => 'required|not_in:Elegir',
-            'unidad_id' => 'required|not_in:Elegir'
+            'unidad_id' => 'required|not_in:Elegir',
+            'descuento_id' => 'required|not_in:Elegir'
 		];
 
 		$messages = [
@@ -234,7 +270,8 @@ class ProductosController extends Component
 			'stock.required' => 'El stock es requerido',
 			'alertas.required' => 'Ingresa el valor mínimo en existencias',
 			'categoria_id.not_in' => 'Elige un nombre de categoría diferente de Elegir',
-            'unidad_id.not_in' => 'Elige un nombre de unidad diferente de Elegir'
+            'unidad_id.not_in' => 'Elige un nombre de unidad diferente de Elegir',
+            'unidad_id.not_in' => 'Elige un descuento  diferente de Elegir'
 		];
 
 		$this->validate($rules, $messages);
@@ -249,13 +286,15 @@ class ProductosController extends Component
 			'stock' => $this->stock,
 			'alertas' => $this->alertas,
 			'categoria_id' => $this->categoria_id,
-            'unidad_id' => $this->unidad_id
+            'unidad_id' => $this->unidad_id,
+            'descuento_id' => $this->descuento_id
 		]);
         $product->impuestos()->sync($this->selectedImpuestos, true);
         $product->proveedores()->sync($this->selectedProveedores, true);
         $this->pvp =  $this->calculaPVP($product);
         $affected =  DB::table('productos')->where('id', $product->id)->update(['pvp' => $this->pvp]);
-	    $this->resetUI();
+
+        $this->resetUI();
 		$this->emit('product-updated', 'Producto Actualizado');
 	}
 

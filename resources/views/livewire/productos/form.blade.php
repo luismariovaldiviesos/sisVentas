@@ -82,14 +82,14 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
-            <label>Descuento</label>
+            <label >Descuento Actual:</label> <input type="button" wire:model='descuentoProducto' class="form-contol btn btn-success"><br>
             <select wire:model='descuento_id' class="form-control">
                 <option  disabled>Elegir</option>
                 @foreach($descuentos as $descuento)
                 <option value="{{$descuento->id}}" >{{$descuento->porcentaje}}</option>
                 @endforeach
             </select>
-            @error('unidad_id') <span class="text-danger er">{{ $message}}</span>@enderror
+            @error('descuento_id') <span class="text-danger er">{{ $message}}</span>@enderror
         </div>
     </div>
 

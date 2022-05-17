@@ -9,7 +9,7 @@ class Producto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre','barcode','costo','precio','pvp','stock','alertas','categoria_id','unidad_id'];
+    protected $fillable = ['nombre','barcode','costo','precio','pvp','stock','alertas','categoria_id','unidad_id', 'descuento_id'];
 
 
     public function categoria()
@@ -48,10 +48,10 @@ class Producto extends Model
          return $this->belongsTo(Unidades::class);
      }
 
-       // un producto puede tener varios descuentos
-   public function descuentos()
+       // un producto tiene un descuento
+   public function descuento()
    {
-        return $this->belongsToMany(Descuento::class,'descuento_producto');
+        return $this->belongsTo(Descuento::class);
     }
 
 

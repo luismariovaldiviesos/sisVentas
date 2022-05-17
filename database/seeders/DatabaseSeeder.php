@@ -19,11 +19,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaSeeder::class);
         $this->call(UnidadesSeeder::class);
         $this->call(ImpuestosSeeder::class);
+        $this->call(DescuentosSeeder::class);
         $this->call(ProductoSeeder::class);
         $this->call(ProveedoresSeeder::class);
         $this->call(ClienteSeeder::class);
         $this->call(RoleSeeder::class);
-        $this->call(DescuentosSeeder::class);
+
 
     }
 }

@@ -24,6 +24,12 @@ class CreateProductosTable extends Migration
             $table->integer('alertas');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
+
+            $table->unsignedBigInteger('unidad_id');
+            $table->foreign('unidad_id')->references('id')->on('unidades');
+
+            $table->unsignedBigInteger('descuento_id');
+            $table->foreign('descuento_id')->references('id')->on('descuentos');
             $table->timestamps();
         });
     }
