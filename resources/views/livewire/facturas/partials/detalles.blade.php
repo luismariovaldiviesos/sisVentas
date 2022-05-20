@@ -33,7 +33,11 @@
                                 >
                             </td>
 
-                           <td class="text-center">${{number_format($item->price,2)}}</td>
+                            {{-- precio --}}
+                            <td class="text-center">${{number_format($item->price,2)}}</td>
+                           {{-- fin precio  --}}
+
+
                              {{-- SUBTOTAL --}}
                              @php
                              $subtotalitem  =  $item->price * $item->quantity ;
