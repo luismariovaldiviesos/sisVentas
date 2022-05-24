@@ -38,7 +38,7 @@ trait CartTrait
                     }
 
 
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
@@ -82,7 +82,7 @@ trait CartTrait
 
 
         //        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-                Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
                 $this->total = Cart::getTotal();
                 $this->itemsQuantity = Cart::getTotalQuantity();
                 $this->emit('scan-ok', $title);
@@ -115,7 +115,7 @@ trait CartTrait
 
                 if($cant > 0)
                 {
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant);
+                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
                     $this->emit('scan-ok', $title);
@@ -139,13 +139,13 @@ trait CartTrait
         {
             $item = Cart::get($productId);
             Cart::remove($productId);
-            // si el producto no tiene imagen, mostramos una default
-            //$img = (count($item->attributes) > 0 ? $item->attributes[0] : Product::find($productId)->imagen);
+            // si el producto no tiene descuento, mostramos uno por default
+            $desc = (count($item->attributes) > 0 ? $item->attributes[0] : Producto::find($productId)->descuento->porcentaje);
 
             $newQty = ($item->quantity) - 1;
 
             if($newQty > 0)
-                    Cart::add($item->id, $item->name, $item->price, $newQty);
+                    Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
                     //Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
 
 

@@ -38,18 +38,21 @@
                            {{-- fin precio  --}}
 
 
-                             {{-- SUBTOTAL --}}
-                             @php
-                             $subtotalitem  =  $item->price * $item->quantity ;
-                             $subdescuento  = $subtotalitem *  $porcentajeDescto /100 ;
-                             @endphp
+                             {{-- descuento --}}
+
                            <td class="text-center">
-                                <input type="number" id="porcentajeDescto"
-                                wire:model="porcentajeDescto"
-                                class="form-control text-center" value="{{$porcentajeDescto}}"
-                                >
+
+                            @if (count($item->attributes) > 0)
+                                <span>
+								<p>{{ $item->attributes[0] }}</p>
+							    </span>
+                            @endif
+
+
                            </td>
-                                {{-- TOTAL --}}
+
+
+                         {{-- TOTAL --}}
 
                                 <td class="text-center">
                                     <h6>
