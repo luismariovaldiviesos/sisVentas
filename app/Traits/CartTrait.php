@@ -38,12 +38,12 @@ trait CartTrait
                     }
 
 
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
+                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-
+                    $cart = Cart::getContent();
+                    //dd($cart);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
-
                     $this->emit('scan-ok','Producto agregado*');
 
 

@@ -12,6 +12,7 @@
                             <th width="13%" class="table-th text-center text-white">Cant.</th>
                             <th class="table-th text-center text-white">Precio Uni</th>
                             <th class="table-th text-center text-white">Dscto</th>
+                            <th class="table-th text-center text-white">impuestos</th>
                             <th class="table-th text-center text-white">precio Total</th>
                             <th class="table-th text-center text-white">acciones</th>
                         </tr>
@@ -41,15 +42,29 @@
                              {{-- descuento --}}
 
                            <td class="text-center">
-
-                            @if (count($item->attributes) > 0)
-                                <span>
-								<p>{{ $item->attributes[0] }}</p>
-							    </span>
-                            @endif
-
-
+                                @if (count($item->attributes) > 0)
+                                    <span>
+                                    <p>{{ $item->attributes[0] }}</p>
+                                    </span>
+                                @endif
                            </td>
+
+
+                           {{-- impuestos --}}
+
+
+                           <td class="text-center">
+
+                            @if (count($item->conditions) > 0)
+                                    <span>
+                                   @foreach ($item->conditions as $condi )
+                                       <p>{{ $condi->nombre }}</p>
+                                   @endforeach
+                                    </span>
+                                @endif
+
+                            </td>
+
 
 
                          {{-- TOTAL --}}
