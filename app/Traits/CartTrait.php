@@ -40,6 +40,7 @@ trait CartTrait
 
                     Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
 
