@@ -83,7 +83,7 @@ trait CartTrait
 
 
         //        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-                Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
+                Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
                 $this->total = Cart::getTotal();
                 $this->itemsQuantity = Cart::getTotalQuantity();
                 $this->emit('scan-ok', $title);
@@ -116,7 +116,7 @@ trait CartTrait
 
                 if($cant > 0)
                 {
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje);
+                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
                     $this->emit('scan-ok', $title);
