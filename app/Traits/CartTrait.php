@@ -146,7 +146,10 @@ trait CartTrait
             $newQty = ($item->quantity) - 1;
 
             if($newQty > 0)
-                    Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
+                   $producto  =  Producto::find($productId);
+                   $item->conditions[0] = $producto->impuestos;
+                   //dd($item->conditions[0]);
+                    Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0],$item->conditions[0]);
                     //Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
 
 

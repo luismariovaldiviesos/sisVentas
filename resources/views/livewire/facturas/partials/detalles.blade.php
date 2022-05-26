@@ -56,12 +56,12 @@
                            <td class="text-center">
 
                             @if (count($item->conditions) > 0)
-                                    <span>
-                                   @foreach ($item->conditions as $condi )
-                                       <p>{{ $condi->nombre }}</p>
-                                   @endforeach
-                                    </span>
-                                @endif
+                            <span>
+                           @foreach ($item->conditions as $condi )
+                               <p>{{ $condi->nombre }}</p>
+                           @endforeach
+                            </span>
+                        @endif
 
                             </td>
 
