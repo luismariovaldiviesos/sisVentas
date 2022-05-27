@@ -12,8 +12,7 @@ trait CartTrait
         {
 
             $product = Producto::where('barcode', $barcode)->first();
-            // $impus = count($product->impuestos);
-            // dd($impus);
+
 
             if($product == null || empty($product))
             {
@@ -38,9 +37,10 @@ trait CartTrait
                     }
 
 
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
+                    Cart::add($product->id, $product->nombre, $product->pvp, $cant, $product->descuento->porcentaje, $product->impuestos);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
                     $cart = Cart::getContent();
+                    $subTotal = Cart::getSubTotal();
                     //dd($cart);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
@@ -83,7 +83,7 @@ trait CartTrait
 
 
         //        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-                Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
+                Cart::add($product->id, $product->nombre, $product->pvp, $cant, $product->descuento->porcentaje, $product->impuestos);
                 $this->total = Cart::getTotal();
                 $this->itemsQuantity = Cart::getTotalQuantity();
                 $this->emit('scan-ok', $title);
@@ -116,7 +116,7 @@ trait CartTrait
 
                 if($cant > 0)
                 {
-                    Cart::add($product->id, $product->nombre, $product->precio, $cant, $product->descuento->porcentaje, $product->impuestos);
+                    Cart::add($product->id, $product->nombre, $product->pvp, $cant, $product->descuento->porcentaje, $product->impuestos);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();
                     $this->emit('scan-ok', $title);
@@ -141,13 +141,14 @@ trait CartTrait
             $item = Cart::get($productId);
             Cart::remove($productId);
             // si el producto no tiene descuento, mostramos uno por default
-            $desc = (count($item->attributes) > 0 ? $item->attributes[0] : Producto::find($productId)->descuento->porcentaje);
+            $desc = (count($item->attributes) > 0 ? $item->attributes[0] : '0');
+            $producto  =  Producto::find($productId);
+            $item->conditions[0] = $producto->impuestos;
 
             $newQty = ($item->quantity) - 1;
 
             if($newQty > 0)
-                   $producto  =  Producto::find($productId);
-                   $item->conditions[0] = $producto->impuestos;
+
                    //dd($item->conditions[0]);
                     Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0],$item->conditions[0]);
                     //Cart::add($item->id, $item->name, $item->price, $newQty, $item->attributes[0]);
