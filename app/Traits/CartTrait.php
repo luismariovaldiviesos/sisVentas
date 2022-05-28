@@ -35,12 +35,12 @@ trait CartTrait
                             $this->emit('no-stock','Stock insuficiente *');
                             return;
                     }
+                    $model =
 
-
-                    Cart::add($product->id, $product->nombre, $product->pvp, $cant, $product->descuento->porcentaje, $product->impuestos);
+                    Cart::add($product->id, $product->nombre, $product->pvp, $cant, $product->descuento->porcentaje, $product->impuestos, $product);
                     //Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
                     $cart = Cart::getContent();
-                    $subTotal = Cart::getSubTotal();
+
                     //dd($cart);
                     $this->total = Cart::getTotal();
                     $this->itemsQuantity = Cart::getTotalQuantity();

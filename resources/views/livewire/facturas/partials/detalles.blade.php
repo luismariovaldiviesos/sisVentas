@@ -14,6 +14,7 @@
                             <th class="table-th text-center text-white">Dscto</th>
                             <th class="table-th text-center text-white">impuestos</th>
                             <th class="table-th text-center text-white">precio Total</th>
+                            <th class="table-th text-center text-white">MODELO</th>
                             <th class="table-th text-center text-white">acciones</th>
                         </tr>
                     </thead>
@@ -72,6 +73,13 @@
                                 <td class="text-center">
                                     <h6>
                                         ${{number_format($item->price * $item->quantity,2)}}
+                                    </h6>
+                                </td>
+
+                                {{-- modelo --}}
+                                <td class="text-center">
+                                    <h6>
+                                        {{$item->associatedModel->calculaImpuestos()}}
                                     </h6>
                                 </td>
 

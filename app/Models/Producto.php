@@ -55,6 +55,21 @@ class Producto extends Model
     }
 
 
+    public function calculaDescuento()
+    {
+        $porcentaje = $this->descuento->porcentaje;
+        $valorDescuento =  ($this->precio * $porcentaje) /100;
+        return $valorDescuento;
+    }
+
+
+    public function calculaImpuestos()
+    {
+        $impuestos = $this->impuestos;
+        return $impuestos;
+    }
+
+
 
 
 
