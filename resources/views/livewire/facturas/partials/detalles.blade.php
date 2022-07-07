@@ -76,7 +76,7 @@
                                     </h6>
                                 </td>
 
-                                {{-- modelo --}}
+                                {{-- con el metodo associatedModel se peude llamar a los metodos del modelo (producto en este caso)  --}}
                                 <td class="text-center">
                                     <h6>
                                         {{$item->associatedModel->calculaImpuestos()}}
